@@ -12,8 +12,9 @@ class App extends Component {
     this.state = {
       breakLength: 5,
       sessionLength: 25,
-      setSessionLength : (newLength) => this.setState({ sessionLength: newLength })
-    }
+      setSessionLength : (newLength) => this.setState(
+        { sessionLength: newLength })
+      }
   }
   render() {
       return (
@@ -21,7 +22,9 @@ class App extends Component {
        <Header className="App-header" />
        <Footer className="App-footer" />
        <Break breakLength={this.state.breakLength} />    
-       <Session sessionLength={this.state.sessionLength} setSessionLength={newLength => this.setState({ sessionLength: newLength })} />
+       <Session 
+          sessionLength={this.state.sessionLength} 
+          setSessionLength={newLength => this.setState({ sessionLength: newLength })} />
        <Timer sessionLength={this.state.sessionLength} />
     </div>
   );
