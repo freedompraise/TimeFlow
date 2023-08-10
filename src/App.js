@@ -18,15 +18,15 @@ class App extends Component {
   }
   render() {
       return (
-    <div className="App">
-       <Header className="App-header" />
-       <Footer className="App-footer" />
-       <Break breakLength={this.state.breakLength} />    
-       <Session 
-          sessionLength={this.state.sessionLength} 
-          setSessionLength={newLength => this.setState({ sessionLength: newLength })} />
-       <Timer sessionLength={this.state.sessionLength} />
-    </div>
+        <div className="App">
+          <Header className="App-header" />
+          <Footer className="App-footer" />
+          <Break breakLength={this.state.breakLength} />    
+          <Session 
+              sessionLength={this.state.sessionLength} 
+              setSessionLength={newLength => this.setState({ sessionLength: newLength })} />
+          <Timer sessionLength={this.state.sessionLength} />
+        </div>
   );
 }
 };
