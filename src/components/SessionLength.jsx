@@ -1,12 +1,16 @@
 
 const Session = ({ sessionLength, setSessionLength }) => {
-        
+
   const incrementSession = () => {
-    setSessionLength(sessionLength + 1);
+     if (sessionLength < 40){
+        setSessionLength(sessionLength + 1);
+     }
   };
 
   const decrementSession = () => {
-    setSessionLength(sessionLength - 1);
+    if (sessionLength > 5){
+        setSessionLength(sessionLength - 1);
+    }
   };
 
   return (
