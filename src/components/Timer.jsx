@@ -4,15 +4,69 @@ class Timer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            timeLeft: this.props.sessionLength * 60, // in seconds
+            isRunning: false,
         };
+        this.timer = null;
     }
+
+    startStopTimer = () => {
+        if (this.state.isRunning) {
+            clearInterval(this.timer); // stop the timer
+            this.setState({
+                isRunning: false,
+            });
+        } else {
+            this.timer = setInterval(this.tick, 1000); // start the timer
+            this.setState({
+                isRunning: true,
+            });
+        }
+    }
+
+    resetTimer = () => {
+        clearInterval(this.timer); // stop the timer
+        this.setState({
+            timeleft: this.props.sessionLength * 60,
+            isRunning: false,
+        })
+    }
+
+    tick = () => {
+        if (this.state.timeLeft > 0){
+            this.setState({
+                timeLeft: this.state.timeLeft - 1,
+            });
+        } else {
+            clearInterval(this.timer); // stop the timer when it reaches 0
+            this.setState({
+                isRunning: false,
+            });
+        }
+    }
+
+
 
     render() {
         return (
             <div>
         <p className="timer-label" id='timer-label'>Session</p>
-        <p className="time-left" id='time-left'>25:00</p>
-        <button className="start_stop" id='start_stop' >Start/Stop</button>
+        
+        <p 
+        className="time-left" 
+        id='time-left'
+        >
+            {this.state.timeLeft}
+            </p>
+
+        <button 
+        className="start_stop" 
+        id='start_stop' 
+        onClick={this.startStopTimer}
+        >
+            Start/Stop
+            </button>
+
         <button className="reset" id='reset' >Reset</button>
         </div>
         );
