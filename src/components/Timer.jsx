@@ -39,7 +39,7 @@ class Timer extends React.Component {
     resetTimer = () => {
         clearInterval(this.timer); // stop the timer
         this.setState({
-            timeleft: this.props.sessionLength * 60,
+            timeLeft: this.props.sessionLength * 60,
             isRunning: false,
         })
     }
