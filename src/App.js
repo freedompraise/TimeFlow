@@ -12,8 +12,15 @@ class App extends Component {
     this.state = {
       breakLength: 5,
       sessionLength: 25,
+      isTimerRunning : false,
+      setIsTimerRunning : (newIsTimerRunning) => this.setState(
+        { 
+          isTimerRunning: newIsTimerRunning 
+        }), 
       setSessionLength : (newLength) => this.setState(
-        { sessionLength: newLength })
+        { 
+          sessionLength: newLength 
+        })
       }
   }
   render() {
@@ -23,8 +30,14 @@ class App extends Component {
           <Break breakLength={this.state.breakLength} />    
           <Session 
               sessionLength={this.state.sessionLength} 
-              setSessionLength={newLength => this.setState({ sessionLength: newLength })} />
-          <Timer sessionLength={this.state.sessionLength} />
+              setSessionLength={newLength => this.setState({ sessionLength: newLength })} 
+              isTimerRunning={this.state.isTimerRunning}
+              />
+          <Timer 
+              sessionLength={this.state.sessionLength} 
+              isTimerRunning={this.state.isTimerRunning}
+              setIsTimerRunning={newIsTimerRunning => this.setState({ isTimerRunning: newIsTimerRunning })}
+              />
           <Footer className="App-footer" />
         </div>
   );

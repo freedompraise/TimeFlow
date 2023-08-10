@@ -1,15 +1,19 @@
 
-const Session = ({ sessionLength, setSessionLength }) => {
+const Session = ({ sessionLength, setSessionLength, isTimerRunning }) => {
 
   const incrementSession = () => {
      if (sessionLength < 40){
-        setSessionLength(sessionLength + 1);
+        if (!isTimerRunning){
+                setSessionLength(sessionLength + 1);
+        }
      }
   };
 
   const decrementSession = () => {
     if (sessionLength > 5){
-        setSessionLength(sessionLength - 1);
+        if (!isTimerRunning){
+                setSessionLength(sessionLength - 1);
+        }
     }
   };
 

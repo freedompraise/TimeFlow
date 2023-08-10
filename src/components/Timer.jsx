@@ -5,7 +5,6 @@ class Timer extends React.Component {
         super(props);
         this.state = {
             timeLeft: this.props.sessionLength * 60, // in seconds
-            isRunning: false,
         };
         this.timer = null;
         this.startStopTimer = this.startStopTimer.bind(this);
@@ -21,16 +20,12 @@ class Timer extends React.Component {
       
 
     startStopTimer = () => {
-        if (this.state.isRunning) {
+        if (this.props.isRunning) {
             clearInterval(this.timer); // stop the timer
-            this.setState({
-                isRunning: false,
-            });
+            this.props.setIsTimerRunning(false);
         } else {
             this.timer = setInterval(this.tick, 1000); // start the timer
-            this.setState({
-                isRunning: true,
-            });
+            this.props.setIsTimerRunning(true);
         }
     }
 
@@ -38,8 +33,8 @@ class Timer extends React.Component {
         clearInterval(this.timer); // stop the timer
         this.setState({
             timeLeft: this.props.sessionLength * 60,
-            isRunning: false,
         })
+        this.props.setIsTimerRunning(false);
     }
 
     tick = () => {
@@ -49,9 +44,7 @@ class Timer extends React.Component {
             });
         } else {
             clearInterval(this.timer); // stop the timer when it reaches 0
-            this.setState({
-                isRunning: false,
-            });
+            this.props.setIsTimerRunning(false);
         }
     }
 
