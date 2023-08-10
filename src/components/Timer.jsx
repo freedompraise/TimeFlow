@@ -8,7 +8,19 @@ class Timer extends React.Component {
             isRunning: false,
         };
         this.timer = null;
+        this.startStopTimer = this.startStopTimer.bind(this);
+        this.resetTimer = this.resetTimer.bind(this);
     }
+
+    componentDidUpdate(prevProps) {
+        // Update timer when the sessionLength prop changes
+        if (this.props.sessionLength !== prevProps.sessionLength) {
+          this.setState((prevState) => ({
+            timeLeft: prevState.isRunning ? this.props.sessionLength * 60 : prevState.timeLeft
+          }));
+        }
+      }
+      
 
     startStopTimer = () => {
         if (this.state.isRunning) {
