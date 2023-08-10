@@ -15,9 +15,7 @@ class Timer extends React.Component {
     componentDidUpdate(prevProps) {
         // Update timer when the sessionLength prop changes
         if (this.props.sessionLength !== prevProps.sessionLength) {
-          this.setState((prevState) => ({
-            timeLeft: prevState.isRunning ? this.props.sessionLength * 60 : prevState.timeLeft
-          }));
+            this.resetTimer();
         }
       }
       
