@@ -56,20 +56,28 @@ class Timer extends React.Component {
     render() {
         return (
             <div>
-        <p className="timer-label" id='timer-label'>Session</p>     
-        <p 
-            className="time-left" 
-            id='time-left'>
-                {this.formatTime(this.state.timeLeft)}
-        </p>
-        <button 
-            className="start_stop" 
-            id='start_stop' 
-            onClick={this.startStopTimer}>
-            Start/Stop
-        </button>
-        <button className="reset" id='reset' >Reset</button>
-        </div>
+                <p 
+                    className="timer-label" 
+                    id='timer-label'>
+                        Session
+                </p>     
+                <p 
+                    className="time-left" 
+                    id='time-left'>
+                    {this.formatTime(this.state.timeLeft)}
+                </p>
+                <button 
+                    className="start_stop" 
+                    id='start_stop' 
+                    onClick={this.startStopTimer}>
+                    Start/Stop
+                </button>
+                <button 
+                    className="reset" 
+                    id='reset' 
+                    onClick={this.resetTimer}>Reset
+                </button>
+            </div>
         );
     };
 };
