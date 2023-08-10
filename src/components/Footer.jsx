@@ -1,12 +1,12 @@
 const Footer = () => {
-    <h3>Proudly built by 
+    return (<h3>Proudly built by 
         <a 
         href="https://github.com/freedompraise"
         target = "_blank"
         >
-            Praise Freedom Dike
+             Praise Freedom Dike
         </a>
-    </h3>
+    </h3>)
 }
 
 export default Footer ;

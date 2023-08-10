@@ -20,12 +20,12 @@ class App extends Component {
       return (
         <div className="App">
           <Header className="App-header" />
-          <Footer className="App-footer" />
           <Break breakLength={this.state.breakLength} />    
           <Session 
               sessionLength={this.state.sessionLength} 
               setSessionLength={newLength => this.setState({ sessionLength: newLength })} />
           <Timer sessionLength={this.state.sessionLength} />
+          <Footer className="App-footer" />
         </div>
   );
 }
