@@ -45,28 +45,29 @@ class Timer extends React.Component {
         }
     }
 
-
+    formatTime = (timeInseconds) => {
+        const minutes = Math.floor(timeInseconds / 60);
+        const remainingSeconds = Math.floor(timeInseconds % 60);
+        return (
+            `${minutes < 10 ? 0 : ''}${minutes}:${remainingSeconds < 10 ? 0 : ''}${remainingSeconds}` 
+        );
+    }
 
     render() {
         return (
             <div>
-        <p className="timer-label" id='timer-label'>Session</p>
-        
+        <p className="timer-label" id='timer-label'>Session</p>     
         <p 
-        className="time-left" 
-        id='time-left'
-        >
-            {this.state.timeLeft}
-            </p>
-
+            className="time-left" 
+            id='time-left'>
+                {this.formatTime(this.state.timeLeft)}
+        </p>
         <button 
-        className="start_stop" 
-        id='start_stop' 
-        onClick={this.startStopTimer}
-        >
+            className="start_stop" 
+            id='start_stop' 
+            onClick={this.startStopTimer}>
             Start/Stop
-            </button>
-
+        </button>
         <button className="reset" id='reset' >Reset</button>
         </div>
         );
