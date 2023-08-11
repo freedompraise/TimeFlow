@@ -49,6 +49,9 @@ class App extends Component {
         <Timer
           sessionLength={this.state.sessionLength}
           breakLength={this.state.breakLength}
+          setBreakLength={(newLength) =>
+            this.setState({ breakLength: newLength })
+          }
           isTimerRunning={this.state.isTimerRunning}
           setIsTimerRunning={(newIsTimerRunning) =>
             this.setState({ isTimerRunning: newIsTimerRunning })
