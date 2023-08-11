@@ -1,12 +1,15 @@
 import React from "react";
+import Sound from "./Sound";
+import alarmSound from "../assets/sounds/sound.mp3";
 
 class Timer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       timeLeft: this.props.sessionLength * 60, // in seconds
-      isSession: true, // track whether the timer is in session or break mode
       pomodorosCompleted: 0,
+      isSession: true, // track whether the timer is in session or break mode
+      isPlayingAlarm: false, // track whether the alarm is playing
     };
     this.timer = null;
     this.startStopTimer = this.startStopTimer.bind(this);
@@ -21,6 +24,9 @@ class Timer extends React.Component {
   }
 
   startStopTimer = () => {
+    this.setState({
+      isPlayingAlarm: false,
+    });
     if (this.props.isTimerRunning) {
       clearInterval(this.timer); // stop the timer
       this.props.setIsTimerRunning(false);
@@ -35,6 +41,7 @@ class Timer extends React.Component {
     this.setState({
       timeLeft: this.props.sessionLength * 60,
       isSession: true,
+      isPlayingAlarm: false,
     });
     this.props.setIsTimerRunning(false);
   };
@@ -43,13 +50,18 @@ class Timer extends React.Component {
     if (this.state.timeLeft > 0) {
       this.setState({
         timeLeft: this.state.timeLeft - 1,
+        // play the alarm if the timer is at :10
+        isPlayingAlarm:
+          this.state.timeLeft === 11 && !this.state.isPlayingAlarm
+            ? true
+            : false,
       });
     } else {
       clearInterval(this.timer); // stop the timer
 
       this.setState({
-        timeLeft: this.state.isSession
-          ? this.pomodorosCompleted % 3 == 0
+        timeLeft: this.state.isSession // specify the time left based on the mode, ie. session or break
+          ? this.pomodorosCompleted % 3 === 0 // specify the break length based on the number of pomodoros completed
             ? this.props.setBreakLength(3 * this.props.breakLength)
             : this.props.breakLength * 60
           : this.props.sessionLength * 60,
@@ -92,6 +104,10 @@ class Timer extends React.Component {
         <button className="reset" id="reset" onClick={this.resetTimer}>
           Reset
         </button>
+        {/* Play the alarm sound when isPlayingAlarm is true */}
+        {this.state.isPlayingAlarm && (
+          <Sound src={alarmSound} autoplay={true} />
+        )}
       </div>
     );
   }
