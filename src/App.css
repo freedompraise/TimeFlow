@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  background-color: rgb(253, 249, 249);
 }
 
 .App-logo {
@@ -35,6 +34,7 @@
 }
 
 .App-footer h3 {
+  margin-top: auto;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: smaller;
 }
