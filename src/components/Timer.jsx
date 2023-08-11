@@ -6,6 +6,7 @@ class Timer extends React.Component {
     this.state = {
       timeLeft: this.props.sessionLength * 60, // in seconds
       isSession: true, // track whether the timer is in session or break mode
+      pomodorosCompleted: 0,
     };
     this.timer = null;
     this.startStopTimer = this.startStopTimer.bind(this);
