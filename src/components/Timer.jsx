@@ -1,4 +1,6 @@
 import React from "react";
+import Sound from "./Sound";
+import alarmSound from "../assets/sounds/sound.mp3";
 
 class Timer extends React.Component {
   constructor(props) {
@@ -58,8 +60,8 @@ class Timer extends React.Component {
       clearInterval(this.timer); // stop the timer
 
       this.setState({
-        timeLeft: this.state.isSession
-          ? this.pomodorosCompleted % 3 === 0
+        timeLeft: this.state.isSession // specify the time left based on the mode, ie. session or break
+          ? this.pomodorosCompleted % 3 === 0 // specify the break length based on the number of pomodoros completed
             ? this.props.setBreakLength(3 * this.props.breakLength)
             : this.props.breakLength * 60
           : this.props.sessionLength * 60,
@@ -102,6 +104,10 @@ class Timer extends React.Component {
         <button className="reset" id="reset" onClick={this.resetTimer}>
           Reset
         </button>
+        {/* Play the alarm sound when isPlayingAlarm is true */}
+        {this.state.isPlayingAlarm && (
+          <Sound src={alarmSound} autoplay={true} />
+        )}
       </div>
     );
   }
