@@ -5,6 +5,7 @@ import Footer from "./components/Footer.jsx";
 import Session from "./components/SessionLength";
 import Break from "./components/BreakLength";
 import Timer from "./components/Timer";
+import "tailwindcss/tailwind.css";
 
 class App extends Component {
   constructor(props) {
@@ -30,22 +31,25 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App">
+      <div className="App flex justify-center items-center min-h-screen bg-blue-900 text-white">
         <Header className="App-header" />
-        <Break
-          breakLength={this.state.breakLength}
-          sessionLength={this.state.sessionLength}
-          setBreakLength={(newLength) =>
-            this.setState({ breakLength: newLength })
-          }
-        />
-        <Session
-          sessionLength={this.state.sessionLength}
-          setSessionLength={(newLength) =>
-            this.setState({ sessionLength: newLength })
-          }
-          isTimerRunning={this.state.isTimerRunning}
-        />
+        <div className="flex">
+          <Break
+            breakLength={this.state.breakLength}
+            sessionLength={this.state.sessionLength}
+            setBreakLength={(newLength) =>
+              this.setState({ breakLength: newLength })
+            }
+          />
+          <Session
+            sessionLength={this.state.sessionLength}
+            setSessionLength={(newLength) =>
+              this.setState({ sessionLength: newLength })
+            }
+            isTimerRunning={this.state.isTimerRunning}
+          />
+        </div>
+
         <Timer
           sessionLength={this.state.sessionLength}
           breakLength={this.state.breakLength}
