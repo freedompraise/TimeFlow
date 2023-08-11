@@ -8,7 +8,8 @@ const Session = ({ sessionLength, setSessionLength, isTimerRunning }) => {
   };
 
   const decrementSession = () => {
-    if (sessionLength > 5) {
+    if (sessionLength > 1) {
+      // TO DO: revert min sessionLength to 5. It's set to 1 for testing purposes
       if (!isTimerRunning) {
         setSessionLength(sessionLength - 1);
       }
