@@ -8,10 +8,14 @@ class Break extends React.Component {
   }
 
   incrementBreak() {
-    this.props.setBreakLength(this.props.breakLength + 1);
+    if (this.props.breakLength < 10) {
+      // add condition to prevent breakLength from going above 10 minutes
+      this.props.setBreakLength(this.props.breakLength + 1);
+    }
   }
   decrementBreak() {
     if (this.props.breakLength > 1) {
+      // add condition to prevent breakLength from going below 1 minute
       this.props.setBreakLength(this.props.breakLength - 1);
     }
   }
