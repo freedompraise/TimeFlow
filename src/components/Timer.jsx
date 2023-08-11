@@ -6,6 +6,7 @@ class Timer extends React.Component {
     this.state = {
       timeLeft: this.props.sessionLength * 60, // in seconds
       isSession: true, // track whether the timer is in session or break mode
+      pomodorosCompleted: 0,
     };
     this.timer = null;
     this.startStopTimer = this.startStopTimer.bind(this);
@@ -48,8 +49,13 @@ class Timer extends React.Component {
 
       this.setState({
         timeLeft: this.state.isSession
-          ? this.props.breakLength * 60
+          ? this.pomodorosCompleted % 3 == 0
+            ? this.props.setBreakLength(3 * this.props.breakLength)
+            : this.props.breakLength * 60
           : this.props.sessionLength * 60,
+        pomodorosCompleted: !this.state.isSession
+          ? this.state.pomodorosCompleted + 1 // increase the number of pomodoros completed if the timer was in break mode
+          : this.state.pomodorosCompleted,
         isSession: !this.state.isSession, // switch to break mode if the timer was in session mode, or vice versa
       });
       // restart the timer if the auto switch is enabled
