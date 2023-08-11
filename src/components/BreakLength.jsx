@@ -11,7 +11,9 @@ class Break extends React.Component {
     this.props.setBreakLength(this.props.breakLength + 1);
   }
   decrementBreak() {
-    this.props.setBreakLength(this.props.breakLength - 1);
+    if (this.props.breakLength > 1) {
+      this.props.setBreakLength(this.props.breakLength - 1);
+    }
   }
 
   render() {
