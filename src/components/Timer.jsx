@@ -22,6 +22,9 @@ class Timer extends React.Component {
   }
 
   startStopTimer = () => {
+    this.setState({
+      isPlayingAlarm: false,
+    });
     if (this.props.isTimerRunning) {
       clearInterval(this.timer); // stop the timer
       this.props.setIsTimerRunning(false);
@@ -36,6 +39,7 @@ class Timer extends React.Component {
     this.setState({
       timeLeft: this.props.sessionLength * 60,
       isSession: true,
+      isPlayingAlarm: false,
     });
     this.props.setIsTimerRunning(false);
   };
@@ -46,7 +50,7 @@ class Timer extends React.Component {
         timeLeft: this.state.timeLeft - 1,
         // play the alarm if the timer is at :10
         isPlayingAlarm:
-          this.state.timeLeft == 10 && !this.state.isPlayingAlarm
+          this.state.timeLeft === 10 && !this.state.isPlayingAlarm
             ? true
             : false,
       });
@@ -55,7 +59,7 @@ class Timer extends React.Component {
 
       this.setState({
         timeLeft: this.state.isSession
-          ? this.pomodorosCompleted % 3 == 0
+          ? this.pomodorosCompleted % 3 === 0
             ? this.props.setBreakLength(3 * this.props.breakLength)
             : this.props.breakLength * 60
           : this.props.sessionLength * 60,
