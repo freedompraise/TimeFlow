@@ -44,6 +44,11 @@ class Timer extends React.Component {
     if (this.state.timeLeft > 0) {
       this.setState({
         timeLeft: this.state.timeLeft - 1,
+        // play the alarm if the timer is at :10
+        isPlayingAlarm:
+          this.state.timeLeft == 10 && !this.state.isPlayingAlarm
+            ? true
+            : false,
       });
     } else {
       clearInterval(this.timer); // stop the timer
