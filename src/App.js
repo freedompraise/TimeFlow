@@ -34,6 +34,7 @@ class App extends Component {
         <Header className="App-header" />
         <Break
           breakLength={this.state.breakLength}
+          sessionLength={this.state.sessionLength}
           setBreakLength={(newLength) =>
             this.setState({ breakLength: newLength })
           }
