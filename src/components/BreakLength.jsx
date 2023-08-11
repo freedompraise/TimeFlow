@@ -8,15 +8,12 @@ class Break extends React.Component {
   }
 
   incrementBreak() {
-    this.setState({
-      breakLength: this.state.breakLength + 1,
-    });
+    this.props.setBreakLength(this.props.breakLength + 1);
   }
   decrementBreak() {
-    this.setState({
-      breakLength: this.state.breakLength - 1,
-    });
+    this.props.setBreakLength(this.props.breakLength - 1);
   }
+
   render() {
     return (
       <div>
@@ -24,7 +21,7 @@ class Break extends React.Component {
           Break Length
         </p>
         <p className="break-length" id="break-length">
-          {this.state.breakLength}
+          {this.props.breakLength}
         </p>
         <button
           className="break-decrement"
