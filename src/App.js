@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       breakLength: 5,
       sessionLength: 25,
-      isTimerRunning: false,
+      isTimerRunning: false, // check if timer is running
 
       setIsTimerRunning: (newIsTimerRunning) =>
         this.setState({
@@ -48,6 +48,7 @@ class App extends Component {
         />
         <Timer
           sessionLength={this.state.sessionLength}
+          breakLength={this.state.breakLength}
           isTimerRunning={this.state.isTimerRunning}
           setIsTimerRunning={(newIsTimerRunning) =>
             this.setState({ isTimerRunning: newIsTimerRunning })

@@ -5,6 +5,7 @@ class Timer extends React.Component {
     super(props);
     this.state = {
       timeLeft: this.props.sessionLength * 60, // in seconds
+      isSession: true, // track whether the timer is in session or break mode
     };
     this.timer = null;
     this.startStopTimer = this.startStopTimer.bind(this);
@@ -32,6 +33,7 @@ class Timer extends React.Component {
     clearInterval(this.timer); // stop the timer
     this.setState({
       timeLeft: this.props.sessionLength * 60,
+      isSession: true,
     });
     this.props.setIsTimerRunning(false);
   };
@@ -42,8 +44,18 @@ class Timer extends React.Component {
         timeLeft: this.state.timeLeft - 1,
       });
     } else {
-      clearInterval(this.timer); // stop the timer when it reaches 0
-      this.props.setIsTimerRunning(false);
+      clearInterval(this.timer); // stop the timer
+
+      this.setState({
+        timeLeft: this.state.isSession
+          ? this.props.breakLength * 60
+          : this.props.sessionLength * 60,
+        isSession: !this.state.isSession, // switch to break mode if the timer was in session mode, or vice versa
+      });
+      // restart the timer if the auto switch is enabled
+      if (this.props.isTimerRunning) {
+        this.timer = setInterval(this.tick, 1000);
+      }
     }
   };
 
