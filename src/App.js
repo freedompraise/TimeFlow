@@ -31,7 +31,10 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="min-h-screen bg-blue-800 text-white flex flex-col items-center justify-center p-8">
+      <div
+        className="min-h-screen text-white flex flex-col items-center justify-center p-8"
+        style={{ backgroundColor: "#121d3a" }}
+      >
         <Header className="App-header" />
         <div className="flex flex-row space-x-8 mb-8">
           <Break
