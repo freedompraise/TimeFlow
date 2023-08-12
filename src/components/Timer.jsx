@@ -87,7 +87,7 @@ class Timer extends React.Component {
 
   render() {
     return (
-      <div className="rounded-lg border bg-blue-800 p-4 text-center">
+      <div className="rounded-lg border p-4 text-center">
         <p className="text-lg font-semibold mb-2" id="timer-label">
           Session
         </p>
