@@ -91,7 +91,7 @@ class Timer extends React.Component {
     return (
       <div className="rounded-lg border-4 border-gray-800 p-4 text-center">
         <p className="text-2xl font-semibold mb-4" id="timer-label">
-          {{ sessionBreakContent }}
+          {sessionBreakContent}
         </p>
         <p className="text-4xl mb-4" id="time-left">
           {this.formatTime(this.state.timeLeft)}
