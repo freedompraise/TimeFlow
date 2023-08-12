@@ -86,6 +86,7 @@ class Timer extends React.Component {
   };
 
   render() {
+    const startStopButtonContent = this.props.isTimerRunning ? "Stop" : "Start";
     return (
       <div className="rounded-lg border p-4 text-center">
         <p className="text-lg font-semibold mb-2" id="timer-label">
@@ -100,7 +101,7 @@ class Timer extends React.Component {
             id="start_stop"
             onClick={this.startStopTimer}
           >
-            Start/Stop
+            {startStopButtonContent}
           </button>
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full"
