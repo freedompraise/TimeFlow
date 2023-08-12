@@ -94,20 +94,22 @@ class Timer extends React.Component {
         <p className="text-4xl mb-4" id="time-left">
           {this.formatTime(this.state.timeLeft)}
         </p>
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full mb-2"
-          id="start_stop"
-          onClick={this.startStopTimer}
-        >
-          Start/Stop
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full"
-          id="reset"
-          onClick={this.resetTimer}
-        >
-          Reset
-        </button>
+        <div className="mb-2">
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full mr-2"
+            id="start_stop"
+            onClick={this.startStopTimer}
+          >
+            Start/Stop
+          </button>
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full"
+            id="reset"
+            onClick={this.resetTimer}
+          >
+            Reset
+          </button>
+        </div>
         {/* Play the alarm sound when isPlayingAlarm is true */}
         {this.state.isPlayingAlarm && (
           <Sound src={alarmSound} autoplay={true} />
