@@ -33,7 +33,7 @@ class App extends Component {
     return (
       <div className="min-h-screen bg-blue-900 text-white flex flex-col items-center justify-center">
         <Header className="App-header" />
-        <div className="flex">
+        <div className="flex flex-row">
           <Break
             breakLength={this.state.breakLength}
             sessionLength={this.state.sessionLength}

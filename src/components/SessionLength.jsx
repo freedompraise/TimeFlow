@@ -17,13 +17,13 @@ const Session = ({ sessionLength, setSessionLength, isTimerRunning }) => {
   };
 
   return (
-    <div bg-gray-200 p-4 rounded-md shadow-md text-center>
+    <div className="bg-gray-200 p-4 rounded-md shadow-md text-center">
       <p className="text-lg font-semibold" id="session-label">
         Session Length
       </p>
-      <div flex justify-center items-center mt-2>
+      <div className="flex justify-center items-center mt-2">
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-l"
+          className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-l"
           id="session-decrement"
           onClick={decrementSession}
         >
@@ -33,7 +33,7 @@ const Session = ({ sessionLength, setSessionLength, isTimerRunning }) => {
           {sessionLength}
         </p>
         <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-r"
+          className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-r"
           id="session-increment"
           onClick={incrementSession}
         >
