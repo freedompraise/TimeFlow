@@ -9,7 +9,7 @@ const Footer = () => {
           href="https://linkfree.io/freedompraise"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-300 hover:text-blue-200"
+          className="text-red-300 hover:text-blue-200"
         >
           Praise Freedom Dike
         </a>
