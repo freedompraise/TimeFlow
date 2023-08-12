@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./App.css";
+// import "./App.css";
 import Header from "./components/Header.jsx";
 import Footer from "./components/Footer.jsx";
 import Session from "./components/SessionLength";
@@ -31,7 +31,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App flex justify-center items-center min-h-screen bg-blue-900 text-white">
+      <div className="min-h-screen bg-blue-900 text-white flex flex-col items-center justify-center">
         <Header className="App-header" />
         <div className="flex">
           <Break
