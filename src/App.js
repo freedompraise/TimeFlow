@@ -31,9 +31,12 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="min-h-screen bg-blue-800 text-white flex flex-col items-center justify-center">
+      <div
+        className="min-h-screen text-white flex flex-col items-center justify-center p-8"
+        style={{ backgroundColor: "#121d3a" }}
+      >
         <Header className="App-header" />
-        <div className="flex flex-row">
+        <div className="flex flex-row space-x-8 mb-8">
           <Break
             breakLength={this.state.breakLength}
             sessionLength={this.state.sessionLength}
@@ -61,7 +64,7 @@ class App extends Component {
             this.setState({ isTimerRunning: newIsTimerRunning })
           }
         />
-        <Footer className="App-footer" />
+        <Footer className="App-footer mt-8" />
       </div>
     );
   }

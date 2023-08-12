@@ -86,28 +86,31 @@ class Timer extends React.Component {
   };
 
   render() {
+    const startStopButtonContent = this.props.isTimerRunning ? "Stop" : "Start";
     return (
-      <div className="rounded-lg border bg-blue-800 p-4 text-center">
-        <p className="text-lg font-semibold mb-2" id="timer-label">
+      <div className="rounded-lg border-4 border-gray-800 p-4 text-center">
+        <p className="text-2xl font-semibold mb-4" id="timer-label">
           Session
         </p>
         <p className="text-4xl mb-4" id="time-left">
           {this.formatTime(this.state.timeLeft)}
         </p>
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full mb-2"
-          id="start_stop"
-          onClick={this.startStopTimer}
-        >
-          Start/Stop
-        </button>
-        <button
-          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full"
-          id="reset"
-          onClick={this.resetTimer}
-        >
-          Reset
-        </button>
+        <div className="mb-2">
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full mr-2"
+            id="start_stop"
+            onClick={this.startStopTimer}
+          >
+            {startStopButtonContent}
+          </button>
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full"
+            id="reset"
+            onClick={this.resetTimer}
+          >
+            Reset
+          </button>
+        </div>
         {/* Play the alarm sound when isPlayingAlarm is true */}
         {this.state.isPlayingAlarm && (
           <Sound src={alarmSound} autoplay={true} />
