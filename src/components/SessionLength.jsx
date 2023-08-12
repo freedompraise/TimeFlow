@@ -17,27 +17,29 @@ const Session = ({ sessionLength, setSessionLength, isTimerRunning }) => {
   };
 
   return (
-    <div>
-      <p className="session-label" id="session-label">
+    <div className="p-4 rounded-md shadow-md text-center">
+      <p className="text-lg font-semibold" id="session-label">
         Session Length
       </p>
-      <p className="session-length" id="session-length">
-        {sessionLength}
-      </p>
-      <button
-        className="session-decrement"
-        id="session-decrement"
-        onClick={decrementSession}
-      >
-        -
-      </button>
-      <button
-        className="session-increment"
-        id="session-increment"
-        onClick={incrementSession}
-      >
-        +
-      </button>
+      <div className="flex justify-center items-center mt-2">
+        <button
+          className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-l"
+          id="session-decrement"
+          onClick={decrementSession}
+        >
+          -
+        </button>
+        <p className="text-xl mx-4" id="session-length">
+          {sessionLength}
+        </p>
+        <button
+          className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-r"
+          id="session-increment"
+          onClick={incrementSession}
+        >
+          +
+        </button>
+      </div>
     </div>
   );
 };

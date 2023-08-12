@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-  background-color: rgb(253, 249, 249);
 }
 
 .App-logo {
@@ -13,6 +12,20 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
+body {
+  background-color: #3a5268; /* Adjust this color to your preference */
+  margin: auto;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: white; /* Set default text color to white */
+}
+
+/* The rest of your existing CSS styles below */
 
 .App-header {
   min-height: 100px;
@@ -33,19 +46,8 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
-.App-footer h3 {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: smaller;
-}
-
-.App-header h3 {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-size: smaller;
-}
-
 .App-link {
-  color: #61dafb;
+  color: #46646d;
 }
 
 @keyframes App-logo-spin {
