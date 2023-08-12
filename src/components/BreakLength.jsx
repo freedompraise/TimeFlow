@@ -30,14 +30,14 @@ class Break extends React.Component {
         <div className="flex justify-center items-center mt-2">
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-l"
-            onClick={this.props.decrementBreak}
+            onClick={this.decrementBreak}
           >
             -
           </button>
           <p className="text-xl mx-4">{this.props.breakLength}</p>
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-r"
-            onClick={this.props.incrementBreak}
+            onClick={this.incrementBreak}
           >
             +
           </button>
