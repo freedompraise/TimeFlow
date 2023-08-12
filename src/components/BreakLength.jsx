@@ -25,7 +25,7 @@ class Break extends React.Component {
 
   render() {
     return (
-      <div className="bg-gray-200 p-4 rounded-md shadow-md text-center">
+      <div className="p-4 rounded-md shadow-md text-center">
         <p className="text-lg font-semibold">Break Length</p>
         <div className="flex justify-center items-center mt-2">
           <button

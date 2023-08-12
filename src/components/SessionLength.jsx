@@ -17,7 +17,7 @@ const Session = ({ sessionLength, setSessionLength, isTimerRunning }) => {
   };
 
   return (
-    <div className="bg-gray-200 p-4 rounded-md shadow-md text-center">
+    <div className="p-4 rounded-md shadow-md text-center">
       <p className="text-lg font-semibold" id="session-label">
         Session Length
       </p>
