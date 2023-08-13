@@ -17,7 +17,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
+    "test:verbose": "jest --verbose",
+    "test:coverate": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -39,6 +41,8 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-syntax-jsx": "^7.22.5",
+    "@babel/preset-react": "^7.22.5",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^14.0.0",
     "jest": "^27.5.1"
