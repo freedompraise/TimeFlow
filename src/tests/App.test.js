@@ -1,6 +1,8 @@
 import { render } from "@testing-library/react";
 import App from "../App";
 
+jest.mock("../assets/sounds/sound.mp3", () => ""); //nock the sound file import
+
 test("renders App component without errors", () => {
   render(<App />);
   const headerElement = screen.getByText(/TimeFlow/i);
