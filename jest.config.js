@@ -9,4 +9,7 @@ module.exports = {
     "/node_modules/",
     "\\.(css|sass|scss|jpg|jpeg|png|gif|svg|mp3)$",
   ],
+  moduleNameMapper: {
+    "\\.(css|less)$": "identity-obj-proxy",
+  },
 };
