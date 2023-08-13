@@ -5,4 +5,8 @@ module.exports = {
   transform: {
     "^.+\\.jsx?$": "babel-jest",
   },
+  transformIgnorePatterns: [
+    "/node_modules/",
+    "\\.(css|sass|scss|jpg|jpeg|png|gif|svg|mp3)$",
+  ],
 };
