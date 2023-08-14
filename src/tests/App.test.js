@@ -31,5 +31,5 @@ test("renders the Timer component", () => {
 test("renders the footer", () => {
   render(<App />);
   const footerElement = screen.getByText(/built by/i);
-  expect(footerElement.toBeInTheDocument());
+  expect(footerElement).toBeInTheDocument();
 });
