@@ -17,7 +17,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --watchAll --coverage",
+    "test": "react-scripts test --coverage",
     "test:verbose": "jest --verbose",
     "test:coverate": "jest --coverage",
     "eject": "react-scripts eject"
