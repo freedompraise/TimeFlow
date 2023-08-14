@@ -1,8 +1,8 @@
-# Pomodoro Timer App
+# TimeFlow
 
 ## Overview
 
-The **Pomodoro Timer App** is a productivity tool based on the **Pomodoro Technique**, designed to help you stay focused and manage your work sessions effectively. The app allows you to set customizable session and break lengths, and it includes an alarm feature to notify you when a session is completed. This app is built using **React** and offers a user-friendly interface.
+The **TimeFlow App** is a productivity tool based on the **Pomodoro Technique**, designed to help you stay focused and manage your work sessions effectively. The app allows you to set customizable session and break lengths, and it includes an alarm feature to notify you when a session is completed. This app is built using **React** and offers a user-friendly interface.
 
 ## Features
 
@@ -31,15 +31,15 @@ The **Pomodoro Timer App** is a productivity tool based on the **Pomodoro Techni
 <!-- ## Customization  TO DO
 You can customize the app's behavior by modifying the session and break lengths, the alarm sound, and the behavior of the timer when a session completes. -->
 
-## License
-
-This project is licensed under the MIT License. See [LICENSE](https://opensource.org/license/mit/) for more details
-
 ## Acknowledgments
 
 I started this project initially as part of the FreeCodeCamp [Front End Libraries Certification](https://www.freecodecamp.org/learn/front-end-development-libraries). I later veered off to explore and add more features.
 
 This project was inspired by the Pomodoro Technique, a time management method developed by [Francesco Cirillo](https://francescocirillo.com/).
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](https://opensource.org/license/mit/) for more details
 
 ---
 
