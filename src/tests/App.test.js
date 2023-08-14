@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import App from "../App";
 
 jest.mock("../assets/sounds/sound.mp3", () => ""); //nock the sound file import
@@ -30,6 +30,6 @@ test("renders the Timer component", () => {
 
 test("renders the footer", () => {
   render(<App />);
-  footerElement = screen.getByText(/built by/i);
+  const footerElement = screen.getByText(/built by/i);
   expect(footerElement.toBeInTheDocument());
 });
