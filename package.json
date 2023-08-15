@@ -19,7 +19,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --coverage",
     "test:verbose": "jest --verbose",
-    "test:coverate": "jest --coverage",
+    "test:coverage": "jest --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@babel/plugin-syntax-jsx": "^7.22.5",
     "@babel/preset-react": "^7.22.5",
     "identity-obj-proxy": "^3.0.0",
