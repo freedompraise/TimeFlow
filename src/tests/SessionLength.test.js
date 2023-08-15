@@ -1,9 +1,11 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Session from "..components/SessionLength";
+import Session from "../components/SessionLength";
+
+const SessionLength = 25;
 
 test("clicking decrement button reduces session length", () => {
-  render(<Session />);
+  render(<Session sessionLength={SessionLength} />);
 
   const decrementButton = screen.getByTestId("session-decrement");
   fireEvent.click(decrementButton);
@@ -13,7 +15,7 @@ test("clicking decrement button reduces session length", () => {
 });
 
 test("clicking increment button increases session length", () => {
-  render(<Session />);
+  render(<Session sessionLength={SessionLength} />);
 
   const incrementButton = screen.getByTestId("session-increment");
   fireEvent.click(incrementButton);

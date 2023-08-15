@@ -25,16 +25,22 @@ const Session = ({ sessionLength, setSessionLength, isTimerRunning }) => {
         <button
           className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-l"
           id="session-decrement"
+          data-testid="session-decrement"
           onClick={decrementSession}
         >
           -
         </button>
-        <p className="text-xl mx-4" id="session-length">
+        <p
+          className="text-xl mx-4"
+          id="session-length"
+          data-testid="session-length"
+        >
           {sessionLength}
         </p>
         <button
           className="bg-blue-500 text-white hover:bg-blue-600 font-semibold py-2 px-4 rounded-r"
           id="session-increment"
+          data-testid="session-increment"
           onClick={incrementSession}
         >
           +

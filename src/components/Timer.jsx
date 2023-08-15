@@ -93,20 +93,22 @@ class Timer extends React.Component {
         <p className="text-2xl font-semibold mb-4" id="timer-label">
           {sessionBreakContent}
         </p>
-        <p className="text-4xl mb-4" id="time-left">
+        <p className="text-4xl mb-4" id="time-left" data-testid="time-left">
           {this.formatTime(this.state.timeLeft)}
         </p>
         <div className="mb-2">
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full mr-2"
-            id="start_stop"
+            id="start_stop-button"
+            data-testid="start_stop-button"
             onClick={this.startStopTimer}
           >
             {startStopButtonContent}
           </button>
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-full"
-            id="reset"
+            id="reset-button"
+            data-testid="reset-button"
             onClick={this.resetTimer}
           >
             Reset
