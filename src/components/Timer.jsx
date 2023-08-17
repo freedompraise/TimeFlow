@@ -63,8 +63,8 @@ class Timer extends React.Component {
         timeLeft: this.state.isSession // specify the time left based on the mode, ie. session or break
           ? this.pomodorosCompleted % 3 === 0 // specify the break length based on the number of pomodoros completed
             ? this.props.setBreakLength(3 * this.props.breakLength)
-            : this.props.breakLength * 60
-          : this.props.sessionLength * 60,
+            : this.props.breakLength * 60 // switch time left to break length in seconds if the timer was in session mode
+          : this.props.sessionLength * 60, //
         pomodorosCompleted: !this.state.isSession
           ? this.state.pomodorosCompleted + 1 // increase the number of pomodoros completed if the timer was in break mode
           : this.state.pomodorosCompleted,
@@ -87,7 +87,7 @@ class Timer extends React.Component {
 
   render() {
     const startStopButtonContent = this.props.isTimerRunning ? "Stop" : "Start";
-    const sessionBreakContent = this.props.isSession ? "Session" : "Break";
+    const sessionBreakContent = this.state.isSession ? "Session" : "Break";
     return (
       <div className="rounded-lg border-4 border-gray-800 p-4 text-center">
         <p className="text-2xl font-semibold mb-4" id="timer-label">
