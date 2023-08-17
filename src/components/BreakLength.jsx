@@ -10,16 +10,19 @@ class Break extends React.Component {
   incrementBreak() {
     if (
       this.props.breakLength < 10 &&
-      this.props.breakLength < this.props.sessionLength
+      this.props.breakLength < this.props.sessionLength &&
+      !this.props.isTimerRunning
     ) {
       // add condition to prevent breakLength from going above 10 minutes or sessionLength
       this.props.setBreakLength(this.props.breakLength + 1);
     }
   }
   decrementBreak() {
-    if (this.props.breakLength > 1) {
-      // add condition to prevent breakLength from going below 1 minute
-      this.props.setBreakLength(this.props.breakLength - 1);
+    if (!this.props.isTimerRunning) {
+      if (this.props.breakLength > 1) {
+        // add condition to prevent breakLength from going below 1 minute
+        this.props.setBreakLength(this.props.breakLength - 1);
+      }
     }
   }
 

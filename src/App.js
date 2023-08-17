@@ -43,6 +43,7 @@ class App extends Component {
             setBreakLength={(newLength) =>
               this.setState({ breakLength: newLength })
             }
+            isTimerRunning={this.state.isTimerRunning}
           />
           <Session
             sessionLength={this.state.sessionLength}
