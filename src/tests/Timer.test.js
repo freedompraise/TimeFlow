@@ -9,6 +9,11 @@ import {
 import Timer from "../components/Timer";
 
 jest.mock("../components/Sound", () => () => null);
+
+// Define a helper function to advance the timer by a given number of seconds
+const advanceTimer = (seconds) => {
+  jest.advanceTimersByTime(seconds * 1000);
+};
 jest.useFakeTimers();
 
 describe("Timer Component", () => {
@@ -77,48 +82,4 @@ describe("Timer Component", () => {
       expect(mockSetIsTimerRunning).toHaveBeenCalledWith(false);
     }, 1000); // Adjust the timeout value based on your implementation
   });
-
-  // test("timer decrements correctly after starting", async () => {
-  //   render(
-  //     <Timer
-  //       sessionLength={25}
-  //       breakLength={5}
-  //       setBreakLength={() => {}}
-  //       isTimerRunning={false}
-  //       setIsTimerRunning={() => {}}
-  //     />
-  //   );
-  //   // Start the timer
-  //   const startStopButton = screen.getByTestId("start_stop-button");
-  //   fireEvent.click(startStopButton);
-  //   // Wait for a moment to ensure the timer decrements
-  //   await waitFor(() => {
-  //     const timerDisplay = screen.getByTestId("time-left");
-  //     expect(timerDisplay).not.toHaveTextContent("25:00");
-  //   });
-  // });
-
-  // // test("timer stops after reaching 0", async () => {
-  // //   render(
-  // //     <Timer
-  // //       sessionLength={1}
-  // //       breakLength={1}
-  // //       setBreakLength={() => {}}
-  // //       isTimerRunning={false}
-  // //       setIsTimerRunning={() => {}}
-  // //     />
-  // //   );
-  // //   // Start the timer
-  // //   const startStopButton = screen.getByTestId("start_stop-button");
-  // //   fireEvent.click(startStopButton);
-  // //   act(() => {
-  // //     fireEvent.click(startStopButton);
-  // //   });
-  // //   // Wait for the timer to reach 0
-  // //   await act(async () => {
-  // //     expect(screen.getBy("time-left")).toHaveTextContent("00:00");
-  // //   });
-  // //   // Ensure that the setIsTimerRunning mock function was called with false
-  // //   expect(mockSetIsTimerRunning).toHaveBeenCalledWith(false);
-  // // });
 });
