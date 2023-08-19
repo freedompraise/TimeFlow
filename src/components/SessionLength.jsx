@@ -27,7 +27,6 @@ class Session extends Component {
   handleLengthChange = (e) => {
     const value = e.target.value;
     if (value >= 5 && value <= 40) {
-      this.setState({ sessionLength: value });
       this.props.setSessionLength(value);
     }
   };
@@ -54,7 +53,7 @@ class Session extends Component {
             data-testid="session-length"
             value={sessionLength}
             onChange={this.handleLengthChange}
-            className="rounded-md py-2 px-4 mx-2 w-12 text-center"
+            className="rounded-md py-2 px-4 mx-2 w-10 text-center"
             style={{ backgroundColor: "transparent" }}
           />
           <button

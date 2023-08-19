@@ -56,7 +56,7 @@ class Break extends React.Component {
             data-testid="break-length"
             value={breakLength}
             onChange={this.handleLengthChange}
-            className="rounded-md py-2 px-4 mx-2 w-12 text-center"
+            className="rounded-md py-2 px-4 mx-2 w-8 text-center"
             style={{ backgroundColor: "transparent" }}
           />
           <button
