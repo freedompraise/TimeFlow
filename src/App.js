@@ -35,7 +35,7 @@ class App extends Component {
   render() {
     return (
       <div
-        className="min-h-screen text-white flex flex-col items-center justify-center p-8"
+        className="min-h-screen text-white flex flex-col items-center justify-center p-16"
         style={{ backgroundColor: "#121d3a" }}
       >
         <Header className="App-header" />
