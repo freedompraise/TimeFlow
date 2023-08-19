@@ -3,19 +3,11 @@ import React, { Component } from "react";
 class Session extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      sessionLength: props.sessionLength,
-      setSessionLength: (newLength) =>
-        this.setState({
-          sessionLength: newLength,
-        }),
-    };
     this.handleLengthChange = this.handleLengthChange.bind(this);
   }
 
   incrementSession = () => {
-    const { sessionLength, setSessionLength } = this.state;
-    const { isTimerRunning } = this.props;
+    const { isTimerRunning, sessionLength, setSessionLength } = this.props;
 
     if (sessionLength < 40 && !isTimerRunning) {
       this.setState({ sessionLength: sessionLength + 1 });
@@ -24,8 +16,7 @@ class Session extends Component {
   };
 
   decrementSession = () => {
-    const { sessionLength, setSessionLength } = this.state;
-    const { isTimerRunning } = this.props;
+    const { isTimerRunning, sessionLength, setSessionLength } = this.props;
 
     if (sessionLength > 5 && !isTimerRunning) {
       this.setState({ sessionLength: sessionLength - 1 });
@@ -42,7 +33,7 @@ class Session extends Component {
   };
 
   render() {
-    const { sessionLength } = this.state;
+    const { sessionLength } = this.props;
 
     return (
       <div className="p-4 rounded-md shadow-md text-center">
