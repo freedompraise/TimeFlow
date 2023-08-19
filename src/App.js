@@ -5,6 +5,7 @@ import Footer from "./components/Footer.jsx";
 import Session from "./components/SessionLength";
 import Break from "./components/BreakLength";
 import Timer from "./components/Timer";
+import TaskList from "./components/TaskList.jsx";
 import "tailwindcss/tailwind.css";
 
 class App extends Component {
@@ -67,6 +68,7 @@ class App extends Component {
             this.setState({ isTimerRunning: newIsTimerRunning })
           }
         />
+        <TaskList />
         <Footer className="App-footer mt-8" />
       </div>
     );
