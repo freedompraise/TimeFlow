@@ -3,6 +3,9 @@ import React from "react";
 class Break extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      inputValue: this.props.breakLength.toString(), // for controlled input
+    };
     this.handleLengthChange = this.handleLengthChange.bind(this);
   }
 
@@ -26,14 +29,23 @@ class Break extends React.Component {
     }
   };
 
+  componentDidUpdate(prevProps) {
+    // Check if the breakLength prop has changed
+    if (prevProps.breakLength !== this.props.breakLength) {
+      // Update inputValue with the new breakLength as a string
+      this.setState({ inputValue: this.props.breakLength.toString() });
+    }
+  }
+
   handleLengthChange = (e) => {
-    const value = e.target.value;
-    if (value >= 5 && value <= 40) {
-      this.setState({ breakLength: value });
-      this.props.setBreakLength(value);
+    const newValue = e.target.value;
+
+    // Only update state if the value is a valid number within the specified range
+    if (!isNaN(newValue) && newValue >= 1 && newValue <= 10) {
+      this.setState({ inputValue: newValue });
+      this.props.setBreakLength(parseInt(newValue, 10));
     }
   };
-
   render() {
     const { breakLength } = this.props;
 
@@ -54,9 +66,9 @@ class Break extends React.Component {
           <input
             id="break-length"
             data-testid="break-length"
-            value={breakLength}
+            value={this.state.inputValue}
             onChange={this.handleLengthChange}
-            className="rounded-md py-2 px-4 mx-2 w-10 text-center"
+            className="rounded-md py-2 px-2 mx-0 w-12 text-center"
             style={{ backgroundColor: "transparent" }}
           />
           <button
