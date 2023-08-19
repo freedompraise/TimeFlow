@@ -3,30 +3,40 @@ import React from "react";
 class Break extends React.Component {
   constructor(props) {
     super(props);
-    this.incrementBreak = this.incrementBreak.bind(this);
-    this.decrementBreak = this.decrementBreak.bind(this);
+    this.handleLengthChange = this.handleLengthChange.bind(this);
   }
 
-  incrementBreak() {
-    if (
-      this.props.breakLength < 10 &&
-      this.props.breakLength < this.props.sessionLength &&
-      !this.props.isTimerRunning
-    ) {
+  incrementBreak = () => {
+    const { isTimerRunning, breakLength, sessionLength, setBreakLength } =
+      this.props;
+
+    if (breakLength < 10 && breakLength < sessionLength && !isTimerRunning) {
       // add condition to prevent breakLength from going above 10 minutes or sessionLength
-      this.props.setBreakLength(this.props.breakLength + 1);
+      setBreakLength(breakLength + 1);
     }
-  }
-  decrementBreak() {
-    if (!this.props.isTimerRunning) {
-      if (this.props.breakLength > 1) {
+  };
+  decrementBreak = () => {
+    const { isTimerRunning, breakLength, setBreakLength } = this.props;
+
+    if (!isTimerRunning) {
+      if (breakLength > 1) {
         // add condition to prevent breakLength from going below 1 minute
-        this.props.setBreakLength(this.props.breakLength - 1);
+        setBreakLength(breakLength - 1);
       }
     }
-  }
+  };
+
+  handleLengthChange = (e) => {
+    const value = e.target.value;
+    if (value >= 5 && value <= 40) {
+      this.setState({ breakLength: value });
+      this.props.setBreakLength(value);
+    }
+  };
 
   render() {
+    const { breakLength } = this.props;
+
     return (
       <div className="p-4 rounded-md shadow-md text-center">
         <p className="text-lg font-semibold" id="break-label">
@@ -41,13 +51,14 @@ class Break extends React.Component {
           >
             -
           </button>
-          <p
-            className="text-xl mx-4"
+          <input
             id="break-length"
             data-testid="break-length"
-          >
-            {this.props.breakLength}
-          </p>
+            value={breakLength}
+            onChange={this.handleLengthChange}
+            className="rounded-md py-2 px-4 mx-2 w-10 text-center"
+            style={{ backgroundColor: "transparent" }}
+          />
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-r"
             onClick={this.incrementBreak}

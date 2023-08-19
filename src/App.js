@@ -19,16 +19,18 @@ class App extends Component {
         this.setState({
           isTimerRunning: newIsTimerRunning,
         }),
-      setSessionLength: (newLength) =>
-        this.setState({
-          sessionLength: newLength,
-        }),
       setBreakLength: (newLength) =>
         this.setState({
           breakLength: newLength,
         }),
     };
+    this.setSessionLength = this.setSessionLength.bind(this);
   }
+
+  setSessionLength(value) {
+    this.setState({ sessionLength: value });
+  }
+
   render() {
     return (
       <div
