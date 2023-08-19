@@ -53,7 +53,7 @@ class Session extends Component {
             data-testid="session-length"
             value={sessionLength}
             onChange={this.handleLengthChange}
-            className="rounded-md py-2 px-2 mx-2 w-12 text-center"
+            className="rounded-md py-2 px-2 mx-0 w-12 text-center"
             style={{ backgroundColor: "transparent" }}
           />
           <button
