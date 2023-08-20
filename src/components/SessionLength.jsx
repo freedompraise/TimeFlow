@@ -45,8 +45,6 @@ class Session extends Component {
     }
   };
   render() {
-    const { sessionLength } = this.props;
-
     return (
       <div className="p-4 rounded-md shadow-md text-center">
         <p className="text-lg font-semibold" id="session-label">
