@@ -19,12 +19,17 @@ class TaskList extends Component {
       });
     }
   };
-  markTaskCompleted = (index) => {
-    // mark the task as completed by adding a checkmark
+  markTaskCompleted(index) {
     const updatedTasks = [...this.state.tasks];
-    updatedTasks[index] = "✅ " + updatedTasks[index];
+    if (updatedTasks[index].startsWith("✅")) {
+      // Task is already marked as completed, unmark it
+      updatedTasks[index] = updatedTasks[index].substring(1); // Remove the "✅"
+    } else {
+      // Task is not completed, mark it
+      updatedTasks[index] = "✅" + updatedTasks[index];
+    }
     this.setState({ tasks: updatedTasks });
-  };
+  }
 
   removeTask = (index) => {
     // remove the task from the tasks array
@@ -42,6 +47,9 @@ class TaskList extends Component {
   };
 
   render() {
+    const hasCompletedTasks = this.state.tasks.some((task) =>
+      task.startsWith("✅")
+    );
     return (
       <div className="rounded-lg p-8 shadow-md space-y-4">
         <h2 className="text-2xl font-semibold mb-4 text-center">Task List</h2>
@@ -79,12 +87,14 @@ class TaskList extends Component {
             </li>
           ))}
         </ul>
-        <button
-          onClick={this.clearCompletedTasks}
-          className="text-red-300 hover:bg-red-600 font-semibold py-4 px-4 rounded-md mx-auto block mt-4"
-        >
-          Clear Completed Tasks
-        </button>
+        {hasCompletedTasks && (
+          <button
+            onClick={hasCompletedTasks && this.clearCompletedTasks}
+            className="text-red-800 hover:bg-red-600 hover:text-white te bg-blue-500 font-semibold py-4 px-4 rounded-md mx-auto block mt-4"
+          >
+            Clear Completed Tasks
+          </button>
+        )}
       </div>
     );
   }
