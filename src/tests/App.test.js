@@ -33,3 +33,9 @@ test("renders the footer", () => {
   const footerElement = screen.getByText(/built by/i);
   expect(footerElement).toBeInTheDocument();
 });
+
+test("renders the task list", () => {
+  render(<App />);
+  const taskListElement = screen.getByText(/Task List/i);
+  expect(taskListElement).toBeInTheDocument();
+});
