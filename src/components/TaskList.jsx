@@ -60,14 +60,20 @@ class TaskList extends Component {
             className="rounded-md py-2 px-2 w-40 text-white"
             style={{ backgroundColor: "transparent" }}
           />
-          <input
-            type="number"
-            placeholder="Pomodoros"
-            onChange={(e) => this.setState({ pomodorosInput: e.target.value })}
-            value={this.state.pomodorosInput}
-            className="rounded-md py-2 px-4 w-16 text-white"
-            style={{ backgroundColor: "transparent" }}
-          />
+          <div className="flex items-center">
+            <label className="mr-2 text-gray-600">Pomodoros:</label>
+            <input
+              type="number"
+              placeholder="Pomodoros"
+              onChange={(e) =>
+                this.setState({ pomodorosInput: e.target.value })
+              }
+              value={this.state.pomodorosInput}
+              className="rounded-md py-2 px-4 w-16 text-white"
+              style={{ backgroundColor: "transparent" }}
+            />
+          </div>
+
           <button
             onClick={this.addTask}
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded-md ml-2"
