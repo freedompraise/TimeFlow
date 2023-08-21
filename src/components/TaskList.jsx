@@ -57,7 +57,7 @@ class TaskList extends Component {
             placeholder="Enter a task ..."
             onChange={(e) => this.setState({ taskInput: e.target.value })}
             value={this.state.taskInput}
-            className="rounded-md py-2 px-2 w-40 text-white"
+            className="rounded-md py-2 px-2 w-40 mr-2 text-white"
             style={{ backgroundColor: "transparent" }}
           />
           <div className="flex items-center">
