@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import {
-  markTaskCompleted,
-  removeTask,
-  clearCompletedTasks,
-} from "../utils/taskUtils";
+import { removeTask, clearCompletedTasks } from "../utils/taskUtils";
 
 class TaskList extends Component {
   constructor(props) {
@@ -13,6 +9,7 @@ class TaskList extends Component {
     this.state = {
       taskInput: "",
       pomodorosInput: 1, // default number of pomodoros
+      tasks: this.props.tasks || [], // tasks from props
     };
   }
   addTask = () => {
@@ -24,10 +21,19 @@ class TaskList extends Component {
     this.setState({ taskInput: "", pomodorosInput: 1 });
   };
 
-  markTaskCompleted = (index) => {
-    const updatedTasks = markTaskCompleted(this.props.tasks, index);
-    this.props.onUpdateTasks(updatedTasks);
+  toggleTaskCompleted = (index) => {
+    const updatedTasks = [...this.state.tasks];
+    if (updatedTasks[index]) {
+      updatedTasks[index].completed = !updatedTasks[index].completed;
+      this.setState({ tasks: updatedTasks });
+    }
   };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.tasks !== this.props.tasks) {
+      this.setState({ tasks: this.props.tasks || [] });
+    }
+  }
 
   removeTask = (index) => {
     const updatedTasks = removeTask(this.props.tasks, index);
@@ -72,11 +78,15 @@ class TaskList extends Component {
             <li key={index} className="mb-0 flex items-center">
               <input
                 type="checkbox"
-                onChange={() => this.markTaskCompleted(index)}
+                onChange={() => this.toggleTaskCompleted(index)}
                 checked={task.completed}
                 className="mr-2"
               />
-              <span className="text-lg">{task.text}</span>
+              <span
+                className={task.completed ? "line-through text-lg" : "text-lg"}
+              >
+                {task.text}
+              </span>
               <button
                 className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
                 onClick={() => this.removeTask(index)}
