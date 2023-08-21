@@ -54,7 +54,7 @@ class TaskList extends Component {
         <div className="task-list__input mb-2 flex items-center">
           <input
             type="text"
-            placeholder="Enter a task"
+            placeholder="Enter a task ..."
             onChange={(e) => this.setState({ taskInput: e.target.value })}
             value={this.state.taskInput}
             className="rounded-md py-2 px-2 w-40 text-white"
