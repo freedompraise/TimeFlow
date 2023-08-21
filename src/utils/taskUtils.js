@@ -22,18 +22,34 @@ export function removeTask(tasks, taskIndex) {
   return tasks.filter((_, index) => index !== taskIndex);
 }
 
-// Manage tasks based on action ('add', 'complete', 'uncomplete', 'remove')
-export function manageTasks(action, tasks, taskIndex, newTask, pomodoros) {
+// Clear completed tasks
+export function clearCompletedTasks(tasks) {
+  return tasks.filter((task) => !task.completed);
+}
+
+// Manage tasks based on action
+export function manageTasks(action, tasks, taskIndex, taskInput, pomodoros) {
+  const updatedTasks = [...tasks];
+
   switch (action) {
     case "add":
-      return addTask(tasks, newTask, pomodoros);
+      if (taskInput.trim() !== "") {
+        updatedTasks.push({ text: taskInput, completed: false, pomodoros });
+      }
+      break;
     case "complete":
-      return markTaskCompleted(tasks, taskIndex);
-    case "uncomplete":
-      return markTaskUncompleted(tasks, taskIndex);
+      if (!updatedTasks[taskIndex].completed) {
+        updatedTasks[taskIndex].completed = true;
+      }
+      break;
     case "remove":
-      return removeTask(tasks, taskIndex);
+      updatedTasks.splice(taskIndex, 1);
+      break;
+    case "clear":
+      return updatedTasks.filter((task) => !task.completed);
     default:
-      return tasks;
+      break;
   }
+
+  return updatedTasks;
 }
