@@ -57,14 +57,16 @@ class TaskList extends Component {
             placeholder="Enter a task"
             onChange={(e) => this.setState({ taskInput: e.target.value })}
             value={this.state.taskInput}
-            className="rounded-md py-2 px-2 w-40 text-black"
+            className="rounded-md py-2 px-2 w-40 text-white"
+            style={{ backgroundColor: "transparent" }}
           />
           <input
             type="number"
             placeholder="Pomodoros"
             onChange={(e) => this.setState({ pomodorosInput: e.target.value })}
             value={this.state.pomodorosInput}
-            className="rounded-md py-2 px-4 w-16 text-black"
+            className="rounded-md py-2 px-4 w-16 text-white"
+            style={{ backgroundColor: "transparent" }}
           />
           <button
             onClick={this.addTask}
