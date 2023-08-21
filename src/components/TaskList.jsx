@@ -107,7 +107,7 @@ class TaskList extends Component {
         {hasCompletedTasks && (
           <button
             onClick={this.clearCompletedTasks}
-            className="text-red-800 hover:bg-red-600 hover:text-white te bg-blue-500 font-semibold py-4 px-4 rounded-md mx-auto block mt-4"
+            className="text-white hover:bg-red-800 hover:text-white te bg-blue-500 font-semibold py-2 px-2 rounded-md mx-auto block mt-4"
           >
             Clear Completed Tasks
           </button>
