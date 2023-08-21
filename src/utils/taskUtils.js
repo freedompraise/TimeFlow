@@ -3,20 +3,6 @@ export function addTask(tasks, newTask, pomodoros) {
   return [...tasks, { text: newTask, completed: false, pomodoros: pomodoros }];
 }
 
-// Mark a task as completed
-export function markTaskCompleted(tasks, taskIndex) {
-  const updatedTasks = [...tasks];
-  updatedTasks[taskIndex].completed = true;
-  return updatedTasks;
-}
-
-// Mark a completed task as uncompleted
-export function markTaskUncompleted(tasks, taskIndex) {
-  const updatedTasks = [...tasks];
-  updatedTasks[taskIndex].completed = false;
-  return updatedTasks;
-}
-
 // Remove a task from the list
 export function removeTask(tasks, taskIndex) {
   return tasks.filter((_, index) => index !== taskIndex);
@@ -37,10 +23,8 @@ export function manageTasks(action, tasks, taskIndex, taskInput, pomodoros) {
         updatedTasks.push({ text: taskInput, completed: false, pomodoros });
       }
       break;
-    case "complete":
-      if (!updatedTasks[taskIndex].completed) {
-        updatedTasks[taskIndex].completed = true;
-      }
+    case "toggle":
+      updatedTasks[taskIndex].completed = !updatedTasks[taskIndex].completed;
       break;
     case "remove":
       updatedTasks.splice(taskIndex, 1);
