@@ -1,55 +1,47 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import {
+  markTaskCompleted,
+  removeTask,
+  clearCompletedTasks,
+} from "../utils/taskUtils";
 
 class TaskList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      tasks: [],
-      newTask: "",
+      taskInput: "",
+      pomodorosInput: 1, // default number of pomodoros
     };
   }
   addTask = () => {
-    // add the new task to the tasks array
-    if (this.state.newTask.trim() !== "") {
-      this.setState({
-        tasks: [...this.state.tasks, this.state.newTask],
-        newTask: "",
-      });
+    const { taskInput, pomodorosInput } = this.state;
+    if (taskInput.trim() === "") {
+      return;
     }
+    this.props.onUpdateTasks("add", null, taskInput, pomodorosInput);
+    this.setState({ taskInput: "", pomodorosInput: 1 });
   };
-  markTaskCompleted(index) {
-    const updatedTasks = [...this.state.tasks];
-    if (updatedTasks[index].startsWith("✅")) {
-      // Task is already marked as completed, unmark it
-      updatedTasks[index] = updatedTasks[index].substring(1); // Remove the "✅"
-    } else {
-      // Task is not completed, mark it
-      updatedTasks[index] = "✅" + updatedTasks[index];
-    }
-    this.setState({ tasks: updatedTasks });
-  }
+
+  markTaskCompleted = (index) => {
+    const updatedTasks = markTaskCompleted(this.props.tasks, index);
+    this.props.onUpdateTasks(updatedTasks);
+  };
 
   removeTask = (index) => {
-    // remove the task from the tasks array
-    const updatedTasks = [...this.state.tasks];
-    updatedTasks.splice(index, 1);
-    this.setState({ tasks: updatedTasks });
+    const updatedTasks = removeTask(this.props.tasks, index);
+    this.props.onUpdateTasks(updatedTasks);
   };
 
   clearCompletedTasks = () => {
-    // remove all tasks that have been marked as completed
-    const updatedTasks = this.state.tasks.filter(
-      (task) => !task.startsWith("✅")
-    );
-    this.setState({ tasks: updatedTasks });
+    const updatedTasks = clearCompletedTasks(this.props.tasks);
+    this.props.onUpdateTasks(updatedTasks);
   };
 
   render() {
-    const hasCompletedTasks = this.state.tasks.some((task) =>
-      task.startsWith("✅")
-    );
+    const hasCompletedTasks = this.props.tasks.some((task) => task.completed);
+
     return (
       <div className="rounded-lg p-8 shadow-md space-y-4">
         <h2 className="text-2xl font-semibold mb-4 text-center">Task List</h2>
@@ -57,9 +49,16 @@ class TaskList extends Component {
           <input
             type="text"
             placeholder="Enter a task"
-            onChange={(e) => this.setState({ newTask: e.target.value })}
-            value={this.state.newTask}
+            onChange={(e) => this.setState({ taskInput: e.target.value })}
+            value={this.state.taskInput}
             className="rounded-md py-2 px-2 w-40 text-black"
+          />
+          <input
+            type="number"
+            placeholder="Pomodoros"
+            onChange={(e) => this.setState({ pomodorosInput: e.target.value })}
+            value={this.state.pomodorosInput}
+            className="rounded-md py-2 px-4 w-16 text-black"
           />
           <button
             onClick={this.addTask}
@@ -69,15 +68,15 @@ class TaskList extends Component {
           </button>
         </div>
         <ul className="task-list__list">
-          {this.state.tasks.map((task, index) => (
+          {this.props.tasks.map((task, index) => (
             <li key={index} className="mb-0 flex items-center">
               <input
                 type="checkbox"
                 onChange={() => this.markTaskCompleted(index)}
-                checked={task.startsWith("✅")}
+                checked={task.completed}
                 className="mr-2"
               />
-              <span className="text-lg">{task.replace("✅", "")}</span>
+              <span className="text-lg">{task.text}</span>
               <button
                 className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
                 onClick={() => this.removeTask(index)}
