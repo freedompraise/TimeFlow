@@ -31,12 +31,12 @@ class TaskList extends Component {
 
   removeTask = (index) => {
     const updatedTasks = removeTask(this.props.tasks, index);
-    this.props.onUpdateTasks(updatedTasks);
+    this.props.onUpdateTasks("remove", null, null, null, null, updatedTasks);
   };
 
   clearCompletedTasks = () => {
     const updatedTasks = clearCompletedTasks(this.props.tasks);
-    this.props.onUpdateTasks(updatedTasks);
+    this.props.onUpdateTasks("clear", null, null, null, null, updatedTasks);
   };
 
   render() {
@@ -88,7 +88,7 @@ class TaskList extends Component {
         </ul>
         {hasCompletedTasks && (
           <button
-            onClick={hasCompletedTasks && this.clearCompletedTasks}
+            onClick={this.clearCompletedTasks}
             className="text-red-800 hover:bg-red-600 hover:text-white te bg-blue-500 font-semibold py-4 px-4 rounded-md mx-auto block mt-4"
           >
             Clear Completed Tasks
