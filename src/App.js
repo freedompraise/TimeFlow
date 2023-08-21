@@ -6,6 +6,7 @@ import Session from "./components/SessionLength";
 import Break from "./components/BreakLength";
 import Timer from "./components/Timer";
 import TaskList from "./components/TaskList.jsx";
+import { manageTasks } from "./utils/taskUtils.js";
 import "tailwindcss/tailwind.css";
 
 class App extends Component {
@@ -13,8 +14,11 @@ class App extends Component {
     super(props);
     this.state = {
       breakLength: 5,
-      sessionLength: 25,
+      sessionLength: 25, //
       isTimerRunning: false, // check if timer is running
+      tasks: [],
+      newTask: "",
+      pomodoros: 1, // default number of pomodoros for a task
 
       setIsTimerRunning: (newIsTimerRunning) =>
         this.setState({
@@ -26,13 +30,30 @@ class App extends Component {
         }),
     };
     this.setSessionLength = this.setSessionLength.bind(this);
+    this.handleManageTasks = this.handleManageTasks.bind(this);
   }
 
   setSessionLength(value) {
     this.setState({ sessionLength: value });
   }
 
+  handleManageTasks = (action, taskIndex, taskInput, pomodorosInput) => {
+    const { tasks, pomodoros } = this.state;
+    const updatedTasks = manageTasks(
+      action,
+      tasks,
+      taskIndex,
+      taskInput,
+      pomodorosInput || pomodoros
+    );
+    this.setState({
+      tasks: updatedTasks,
+      newTask: action === "add" ? "" : taskInput,
+    });
+  };
+
   render() {
+    // const hasCompletedTasks = this.state.tasks.some((task) => task.completed);
     return (
       <div
         className="min-h-screen text-white flex flex-col items-center justify-center p-16"
@@ -68,7 +89,13 @@ class App extends Component {
             this.setState({ isTimerRunning: newIsTimerRunning })
           }
         />
-        <TaskList />
+        <TaskList
+          tasks={this.state.tasks}
+          newTask={this.state.newTask}
+          pomodoros={this.state.pomodoros}
+          onUpdateTasks={this.handleManageTasks}
+          onAddTask={() => this.handleManageTasks("add")}
+        />
         <Footer className="App-footer mt-8" />
       </div>
     );
