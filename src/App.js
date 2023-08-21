@@ -53,7 +53,6 @@ class App extends Component {
   };
 
   render() {
-    // const hasCompletedTasks = this.state.tasks.some((task) => task.completed);
     return (
       <div
         className="min-h-screen text-white flex flex-col items-center justify-center p-16"
