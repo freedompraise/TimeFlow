@@ -1,19 +1,41 @@
-// Sound.jsx is a component that plays a sound file when it mounts.
 import React from "react";
 
 class Sound extends React.Component {
-  componentDidMount() {
-    // Play the audio file when the component mounts
-    this.playAudio();
+  constructor(props) {
+    super(props);
+    this.audio = new Audio(this.props.src);
+    this.playPromise = null; // Track the play promise
   }
 
-  playAudio = () => {
-    const { src, autoplay } = this.props;
-    const audio = new Audio(src);
+  componentDidMount() {
+    // Play the audio file when the component mounts
+    if (this.props.autoplay) {
+      this.playAudio();
+    }
+  }
 
-    // Autoplay the audio if specified
-    if (autoplay) {
-      audio.play();
+  componentWillUnmount() {
+    // Pause the audio when the component unmounts
+    this.audio.pause();
+    this.audio.currentTime = 0;
+  }
+  // TO DO: make the alarm sound play for entire 10 secs, rahter than just 1 sec
+  playAudio = () => {
+    // Play the audio only if it's not already playing
+    if (this.audio.paused) {
+      this.playPromise = this.audio.play();
+
+      // Handle the promise to avoid errors
+      if (this.playPromise !== undefined) {
+        this.playPromise
+          .then(() => {
+            // Playback started successfully
+          })
+          .catch((error) => {
+            // Playback was interrupted or failed
+            console.error("Audio playback error:", error);
+          });
+      }
     }
   };
 

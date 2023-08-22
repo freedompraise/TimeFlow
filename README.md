@@ -10,7 +10,7 @@ The **TimeFlow App** is a productivity tool based on the **Pomodoro Technique**,
 - Automatic switch between session and break modes.
 - Play an alarm sound to signal the end of a session.
 - Start, stop, and reset the timer.
-- Increase break session duration after completing a set number of pomodoros.
+- Increase break session duration after completing a set number of Pomodoros.
 
 ## Getting Started
 
@@ -37,10 +37,16 @@ I started this project initially as part of the FreeCodeCamp [Front End Librarie
 
 This project was inspired by the Pomodoro Technique, a time management method developed by [Francesco Cirillo](https://francescocirillo.com/).
 
+## Contribute to Pomodoro Web App
+
+Want to be part of the Pomodoro revolution? Contribute to our app and help us make productivity stylish!
+
+See our [Contribution Guidelines](docs/CONTRIBUTING.md) to get started.
+
+For a list of fantastic reasons to contribute, check out our [Contributors Guide](docs/Contributors.md) 🎉
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](https://opensource.org/license/mit/) for more details
 
 ---
-
-Enjoy your productive work sessions with the Pomodoro Timer App!
