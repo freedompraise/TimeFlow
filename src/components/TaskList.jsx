@@ -61,7 +61,7 @@ class TaskList extends Component {
         {/* Task list */}
         <ul className="task-list__list">
           {this.props.tasks.map((task, index) => (
-            <li key={index} className="mb-auto">
+            <li key={index} className="mb-4">
               <div className="flex items-center">
                 <input
                   type="checkbox"
