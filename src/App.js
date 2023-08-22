@@ -88,7 +88,7 @@ class App extends Component {
             this.setState({ isTimerRunning: newIsTimerRunning })
           }
         />
-        <div className="w-full">
+        <div className="w-150">
           <TaskList
             tasks={this.state.tasks}
             newTask={this.state.newTask}
