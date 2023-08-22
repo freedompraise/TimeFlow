@@ -88,13 +88,15 @@ class App extends Component {
             this.setState({ isTimerRunning: newIsTimerRunning })
           }
         />
-        <TaskList
-          tasks={this.state.tasks}
-          newTask={this.state.newTask}
-          pomodoros={this.state.pomodoros}
-          onUpdateTasks={this.handleManageTasks}
-          onAddTask={() => this.handleManageTasks("add")}
-        />
+        <div className="w-150">
+          <TaskList
+            tasks={this.state.tasks}
+            newTask={this.state.newTask}
+            pomodoros={this.state.pomodoros}
+            onUpdateTasks={this.handleManageTasks}
+            onAddTask={() => this.handleManageTasks("add")}
+          />
+        </div>
         <Footer className="App-footer mt-8" />
       </div>
     );

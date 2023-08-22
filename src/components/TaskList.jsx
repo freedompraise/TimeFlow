@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { removeTask, clearCompletedTasks } from "../utils/taskUtils";
 
 class TaskList extends Component {
@@ -57,6 +57,42 @@ class TaskList extends Component {
     return (
       <div className="rounded-lg p-8 shadow-md space-y-4">
         <h2 className="text-2xl font-semibold mb-4 text-center">Task List</h2>
+        {/* Task list */}
+        <ul className="task-list__list">
+          {this.props.tasks.map((task, index) => (
+            <li key={index} className="mb-4">
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  onChange={() => this.toggleTaskCompleted(index)}
+                  checked={task.completed}
+                  className="mr-2"
+                />
+                <span
+                  className={
+                    task.completed ? "line-through text-lg" : "text-lg"
+                  }
+                >
+                  {task.text}
+                </span>
+                <button
+                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
+                  onClick={() => this.removeTask(index)}
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+        {hasCompletedTasks && (
+          <button
+            onClick={this.clearCompletedTasks}
+            className="text-white hover:bg-red-800 hover:text-white te bg-blue-500 font-semibold py-2 px-2 rounded-md mx-auto block mt-4"
+          >
+            Clear Completed Tasks
+          </button>
+        )}
 
         {/* Toggle input form */}
         <button
@@ -68,17 +104,17 @@ class TaskList extends Component {
 
         {/* Input form */}
         {isAddingTask && (
-          <div className="task-list__input mb-2 flex items-center mt-2 ">
+          <div className="task-list__input mt-2 ">
             <input
               type="text"
               placeholder="Enter a task ..."
               onChange={(e) => this.setState({ taskInput: e.target.value })}
               value={taskInput}
-              className="rounded-md py-2 px-2 w-40 mr-2 text-white"
+              className="rounded-md py-2 px-2 w-full mb-2 text-white"
               style={{ backgroundColor: "transparent" }}
             />
-            <div className="flex items-center">
-              <label className="mr-2 text-gray-600">Pomodoros:</label>
+            <div className="flex flex-col md:flex-row md:items-center md:space-x-2">
+              <label className="mr-2 text-gray-600">Number of Pomodoros:</label>
               <input
                 type="number"
                 placeholder="Pomodoros"
@@ -86,50 +122,18 @@ class TaskList extends Component {
                   this.setState({ pomodorosInput: e.target.value })
                 }
                 value={pomodorosInput}
-                className="rounded-md py-2 px-4 w-16 text-white"
+                className="rounded-md py-2 px-4 w-full text-white"
                 style={{ backgroundColor: "transparent" }}
               />
             </div>
 
             <button
               onClick={this.addTask}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded-md ml-2 w-full"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded-md mt-2 w-full md:w-auto"
             >
-              Add Task
+              <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
-        )}
-        {/* Task list */}
-        <ul className="task-list__list">
-          {this.props.tasks.map((task, index) => (
-            <li key={index} className="mb-0 flex items-center">
-              <input
-                type="checkbox"
-                onChange={() => this.toggleTaskCompleted(index)}
-                checked={task.completed}
-                className="mr-2"
-              />
-              <span
-                className={task.completed ? "line-through text-lg" : "text-lg"}
-              >
-                {task.text}
-              </span>
-              <button
-                className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
-                onClick={() => this.removeTask(index)}
-              >
-                <FontAwesomeIcon icon={faTrash} />
-              </button>
-            </li>
-          ))}
-        </ul>
-        {hasCompletedTasks && (
-          <button
-            onClick={this.clearCompletedTasks}
-            className="text-white hover:bg-red-800 hover:text-white te bg-blue-500 font-semibold py-2 px-2 rounded-md mx-auto block mt-4"
-          >
-            Clear Completed Tasks
-          </button>
         )}
       </div>
     );
