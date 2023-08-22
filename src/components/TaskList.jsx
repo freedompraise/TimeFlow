@@ -77,7 +77,7 @@ class TaskList extends Component {
         <ul className="task-list__list">
           {this.props.tasks.map((task, index) => (
             <li key={index} className="mb-4">
-              <div className="flex items-center">
+              <div className="flex items-center mb-4">
                 <input
                   type="checkbox"
                   onChange={() => this.toggleTaskCompleted(index)}
@@ -95,7 +95,7 @@ class TaskList extends Component {
                 <span className="text-sm ml-auto">
                   {task.completed
                     ? "Pomodoros Completed"
-                    : `${task.pomodorosCompleted}/${task.pomodoros} Pomodoros`}
+                    : `${task.pomodorosCompleted}/${task.pomodoros}`}
                 </span>
                 <button
                   className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
