@@ -115,7 +115,7 @@ class TaskList extends Component {
               style={{ backgroundColor: "transparent" }}
             />
             <div className="flex flex-col md:flex-row md:items-center md:space-x-2">
-              <label className="mr-2 text-gray-600">Pomodoros:</label>
+              <label className="mr-2 text-gray-600">Number of Pomodoros:</label>
               <input
                 type="number"
                 placeholder="Pomodoros"
