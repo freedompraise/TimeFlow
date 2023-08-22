@@ -30,6 +30,10 @@ class TaskList extends Component {
     }
   };
 
+  toggleInput = () => {
+    this.setState({ isAddingTask: !this.state.isAddingTask });
+  };
+
   componentDidUpdate(prevProps) {
     if (prevProps.tasks !== this.props.tasks) {
       this.setState({ tasks: this.props.tasks || [] });
