@@ -10,6 +10,7 @@ class TaskList extends Component {
       taskInput: "",
       pomodorosInput: 1, // default number of pomodoros
       tasks: this.props.tasks || [], // tasks from props
+      isAddingTask: false, // Track whether the user is adding a task
     };
   }
   addTask = () => {
