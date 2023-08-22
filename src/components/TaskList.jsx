@@ -57,7 +57,6 @@ class TaskList extends Component {
     return (
       <div className="rounded-lg p-8 shadow-md space-y-4">
         <h2 className="text-2xl font-semibold mb-4 text-center">Task List</h2>
-
         {/* Task list */}
         <ul className="task-list__list">
           {this.props.tasks.map((task, index) => (
