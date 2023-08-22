@@ -68,12 +68,12 @@ class TaskList extends Component {
 
         {/* Input form */}
         {isAddingTask && (
-          <div className="task-list__input mb-2 flex items-center">
+          <div className="task-list__input mb-2 flex items-center mt-2 ">
             <input
               type="text"
               placeholder="Enter a task ..."
               onChange={(e) => this.setState({ taskInput: e.target.value })}
-              value={this.state.taskInput}
+              value={taskInput}
               className="rounded-md py-2 px-2 w-40 mr-2 text-white"
               style={{ backgroundColor: "transparent" }}
             />
@@ -85,7 +85,7 @@ class TaskList extends Component {
                 onChange={(e) =>
                   this.setState({ pomodorosInput: e.target.value })
                 }
-                value={this.state.pomodorosInput}
+                value={pomodorosInput}
                 className="rounded-md py-2 px-4 w-16 text-white"
                 style={{ backgroundColor: "transparent" }}
               />
@@ -93,7 +93,7 @@ class TaskList extends Component {
 
             <button
               onClick={this.addTask}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded-md ml-2"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded-md ml-2 w-full"
             >
               Add Task
             </button>
