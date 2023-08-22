@@ -58,48 +58,6 @@ class TaskList extends Component {
       <div className="rounded-lg p-8 shadow-md space-y-4">
         <h2 className="text-2xl font-semibold mb-4 text-center">Task List</h2>
 
-        {/* Toggle input form */}
-        <button
-          onClick={this.toggleInputForm}
-          className="text-white hover:bg-blue-800 hover:text-white bg-blue-500 font-semibold py-2 px-2 rounded-md mx-auto block"
-        >
-          {isAddingTask ? "Cancel" : "Add Task"}
-        </button>
-
-        {/* Input form */}
-        {isAddingTask && (
-          <div className="task-list__input flex items-center mt-2 ">
-            <input
-              type="text"
-              placeholder="Enter a task ..."
-              onChange={(e) => this.setState({ taskInput: e.target.value })}
-              value={taskInput}
-              className="rounded-md py-2 px-2 w-full mb-2 text-white"
-              style={{ backgroundColor: "transparent" }}
-            />
-            <div className="flex flex-col md:flex-row md:items-center md:space-x-2">
-              <label className="mr-2 text-gray-600">Pomodoros:</label>
-              <input
-                type="number"
-                placeholder="Pomodoros"
-                onChange={(e) =>
-                  this.setState({ pomodorosInput: e.target.value })
-                }
-                value={pomodorosInput}
-                className="rounded-md py-2 px-4 w-full text-white"
-                style={{ backgroundColor: "transparent" }}
-              />
-            </div>
-
-            <button
-              onClick={this.addTask}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded-md mt-2 w-full md:w-auto"
-            >
-              <FontAwesomeIcon icon={faPlus} />
-            </button>
-          </div>
-        )}
-
         {/* Task list */}
         <ul className="task-list__list">
           {this.props.tasks.map((task, index) => (
@@ -135,6 +93,48 @@ class TaskList extends Component {
           >
             Clear Completed Tasks
           </button>
+        )}
+
+        {/* Toggle input form */}
+        <button
+          onClick={this.toggleInputForm}
+          className="text-white hover:bg-blue-800 hover:text-white bg-blue-500 font-semibold py-2 px-2 rounded-md mx-auto block"
+        >
+          {isAddingTask ? "Cancel" : "Add Task"}
+        </button>
+
+        {/* Input form */}
+        {isAddingTask && (
+          <div className="task-list__input mt-2 ">
+            <input
+              type="text"
+              placeholder="Enter a task ..."
+              onChange={(e) => this.setState({ taskInput: e.target.value })}
+              value={taskInput}
+              className="rounded-md py-2 px-2 w-full mb-2 text-white"
+              style={{ backgroundColor: "transparent" }}
+            />
+            <div className="flex flex-col md:flex-row md:items-center md:space-x-2">
+              <label className="mr-2 text-gray-600">Pomodoros:</label>
+              <input
+                type="number"
+                placeholder="Pomodoros"
+                onChange={(e) =>
+                  this.setState({ pomodorosInput: e.target.value })
+                }
+                value={pomodorosInput}
+                className="rounded-md py-2 px-4 w-full text-white"
+                style={{ backgroundColor: "transparent" }}
+              />
+            </div>
+
+            <button
+              onClick={this.addTask}
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded-md mt-2 w-full md:w-auto"
+            >
+              <FontAwesomeIcon icon={faPlus} />
+            </button>
+          </div>
         )}
       </div>
     );
