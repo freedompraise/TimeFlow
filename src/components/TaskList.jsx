@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { removeTask, clearCompletedTasks } from "../utils/taskUtils";
 
 class TaskList extends Component {
@@ -68,16 +68,16 @@ class TaskList extends Component {
 
         {/* Input form */}
         {isAddingTask && (
-          <div className="task-list__input mb-2 flex items-center mt-2 ">
+          <div className="task-list__input flex items-center mt-2 ">
             <input
               type="text"
               placeholder="Enter a task ..."
               onChange={(e) => this.setState({ taskInput: e.target.value })}
               value={taskInput}
-              className="rounded-md py-2 px-2 w-40 mr-2 text-white"
+              className="rounded-md py-2 px-2 w-full mb-2 text-white"
               style={{ backgroundColor: "transparent" }}
             />
-            <div className="flex items-center">
+            <div className="flex flex-col md:flex-row md:items-center md:space-x-2">
               <label className="mr-2 text-gray-600">Pomodoros:</label>
               <input
                 type="number"
@@ -86,16 +86,16 @@ class TaskList extends Component {
                   this.setState({ pomodorosInput: e.target.value })
                 }
                 value={pomodorosInput}
-                className="rounded-md py-2 px-4 w-16 text-white"
+                className="rounded-md py-2 px-4 w-full text-white"
                 style={{ backgroundColor: "transparent" }}
               />
             </div>
 
             <button
               onClick={this.addTask}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded-md ml-2 w-full md:w-auto"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded-md mt-2 w-full md:w-auto"
             >
-              Add Task
+              <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
         )}
