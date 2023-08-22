@@ -93,7 +93,7 @@ class TaskList extends Component {
 
             <button
               onClick={this.addTask}
-              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded-md ml-2 w-full"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-2 rounded-md ml-2 w-full md:w-auto"
             >
               Add Task
             </button>
