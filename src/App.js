@@ -37,18 +37,24 @@ class App extends Component {
     this.setState({ sessionLength: value });
   }
 
-  handleManageTasks = (action, taskIndex, taskInput, pomodorosInput) => {
+  handleManageTasks = (
+    action,
+    taskIndex,
+    newTask,
+    taskInput,
+    pomodorosInput
+  ) => {
     const { tasks, pomodoros } = this.state;
     const updatedTasks = manageTasks(
       action,
       tasks,
       taskIndex,
+      newTask,
       taskInput,
       pomodorosInput || pomodoros
     );
     this.setState({
       tasks: updatedTasks,
-      newTask: action === "add" ? "" : taskInput,
     });
   };
 

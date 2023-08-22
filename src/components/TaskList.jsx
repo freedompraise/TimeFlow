@@ -9,17 +9,33 @@ class TaskList extends Component {
     this.state = {
       taskInput: "",
       pomodorosInput: 1, // default number of pomodoros
-      tasks: this.props.tasks || [], // tasks from props
       isAddingTask: false, // Track whether the user is adding a task
     };
   }
+
   addTask = () => {
     const { taskInput, pomodorosInput } = this.state;
     if (taskInput.trim() === "") {
       return;
     }
-    this.props.onUpdateTasks("add", null, taskInput, pomodorosInput);
+    const newTask = {
+      text: taskInput,
+      completed: false,
+      pomodoros: pomodorosInput,
+      pomodorosCompleted: 0, // Initialize pomodorosCompleted
+    };
+    this.props.onUpdateTasks("add", null, newTask, null, null, null);
     this.setState({ taskInput: "", pomodorosInput: 1 });
+  };
+
+  markTaskCompleted = (index) => {
+    const updatedTasks = [...this.props.tasks];
+    updatedTasks[index].completed = true;
+
+    // Increment pomodorosCompleted
+    updatedTasks[index].pomodorosCompleted += 1;
+
+    this.props.onUpdateTasks(updatedTasks);
   };
 
   toggleTaskCompleted = (index) => {
@@ -74,6 +90,12 @@ class TaskList extends Component {
                   }
                 >
                   {task.text}
+                </span>
+                {/* Display the pomodoro fraction */}
+                <span className="text-sm ml-auto">
+                  {task.completed
+                    ? "Pomodoros Completed"
+                    : `${task.pomodorosCompleted}/${task.pomodoros} Pomodoros`}
                 </span>
                 <button
                   className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
