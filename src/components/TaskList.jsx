@@ -99,27 +99,32 @@ class TaskList extends Component {
             </button>
           </div>
         )}
+
         {/* Task list */}
         <ul className="task-list__list">
           {this.props.tasks.map((task, index) => (
-            <li key={index} className="mb-0 flex items-center">
-              <input
-                type="checkbox"
-                onChange={() => this.toggleTaskCompleted(index)}
-                checked={task.completed}
-                className="mr-2"
-              />
-              <span
-                className={task.completed ? "line-through text-lg" : "text-lg"}
-              >
-                {task.text}
-              </span>
-              <button
-                className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
-                onClick={() => this.removeTask(index)}
-              >
-                <FontAwesomeIcon icon={faTrash} />
-              </button>
+            <li key={index} className="mb-auto">
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  onChange={() => this.toggleTaskCompleted(index)}
+                  checked={task.completed}
+                  className="mr-2"
+                />
+                <span
+                  className={
+                    task.completed ? "line-through text-lg" : "text-lg"
+                  }
+                >
+                  {task.text}
+                </span>
+                <button
+                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
+                  onClick={() => this.removeTask(index)}
+                >
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+              </div>
             </li>
           ))}
         </ul>
