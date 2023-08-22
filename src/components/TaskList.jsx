@@ -144,7 +144,7 @@ class TaskList extends Component {
                   this.setState({ pomodorosInput: e.target.value })
                 }
                 value={pomodorosInput}
-                className="rounded-md py-2 px-4 w-full text-white"
+                className="rounded-md py-2 px-4 w-16 text-white"
                 style={{ backgroundColor: "transparent" }}
               />
             </div>
