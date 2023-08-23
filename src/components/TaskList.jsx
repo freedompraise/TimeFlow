@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPlus, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { removeTask, clearCompletedTasks } from "../utils/taskUtils";
 
 class TaskList extends Component {
@@ -66,6 +66,14 @@ class TaskList extends Component {
     this.props.onUpdateTasks("clear", null, null, null, null, updatedTasks);
   };
 
+  handleTaskClick = (index) => {
+    const { tasks } = this.props;
+    const selectedTask = tasks[index];
+
+    // Trigger the Timer component to start the task timer
+    this.props.isTimerRunning(selectedTask);
+  };
+
   render() {
     const { isAddingTask, taskInput, pomodorosInput } = this.state;
     const hasCompletedTasks = this.props.tasks.some((task) => task.completed);
@@ -94,6 +102,12 @@ class TaskList extends Component {
                     ? task.text.substring(0, 16) + "..."
                     : task.text}
                 </span>
+                <button
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
+                  onClick={() => this.handleTaskClick(index)}
+                >
+                  <FontAwesomeIcon icon={faPlay} />
+                </button>
                 {/* Display the pomodoro fraction */}
                 <span className="text-sm ml-auto">
                   {task.completed
