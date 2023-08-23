@@ -88,6 +88,7 @@ class TaskList extends Component {
                   className={
                     task.completed ? "line-through text-lg" : "text-lg"
                   }
+                  title={task.text}
                 >
                   {task.text.length > 20
                     ? task.text.substring(0, 16) + "..."
