@@ -100,7 +100,8 @@ class Timer extends React.Component {
 
   render() {
     const startStopButtonContent = this.props.isTimerRunning ? "Stop" : "Start";
-    const sessionBreakContent = this.state.isSession ? "Session" : "Break";
+    const sessionContent = currentTask ? currentTask.text : "Session";
+    const sessionBreakContent = this.state.isSession ? sessionContent : "Break";
     return (
       <div className="rounded-lg border-4 border-gray-800 p-4 text-center">
         <p className="text-2xl font-semibold mb-4" id="timer-label">
