@@ -89,7 +89,9 @@ class TaskList extends Component {
                     task.completed ? "line-through text-lg" : "text-lg"
                   }
                 >
-                  {task.text}
+                  {task.text.length > 20
+                    ? task.text.substring(0, 16) + "..."
+                    : task.text}
                 </span>
                 {/* Display the pomodoro fraction */}
                 <span className="text-sm ml-auto">
