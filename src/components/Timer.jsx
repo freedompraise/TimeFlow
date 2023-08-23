@@ -11,6 +11,7 @@ class Timer extends React.Component {
       isAlerted: false, // track whether the timer has few seconds left, then set alert
       isSession: true, // track whether the timer is in session or break mode
       isPlayingAlarm: false, // track whether the alarm is playing
+      currentTask: null, // track current task being worked on
     };
     this.timer = null;
     this.startStopTimer = this.startStopTimer.bind(this);
