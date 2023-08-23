@@ -93,6 +93,7 @@ class App extends Component {
           setIsTimerRunning={(newIsTimerRunning) =>
             this.setState({ isTimerRunning: newIsTimerRunning })
           }
+          tasks={this.state.tasks}
         />
         <div className="w-150">
           <TaskList
