@@ -49,6 +49,7 @@ class Timer extends React.Component {
     this.setState({
       timeLeft: this.props.sessionLength * 60,
       isSession: true,
+      currentTask: null,
       // isPlayingAlarm: false,
     });
     this.props.setIsTimerRunning(false);
