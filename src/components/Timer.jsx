@@ -14,8 +14,6 @@ class Timer extends React.Component {
       currentTask: null, // track current task being worked on
     };
     this.timer = null;
-    this.startStopTimer = this.startStopTimer.bind(this);
-    this.resetTimer = this.resetTimer.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -33,6 +31,17 @@ class Timer extends React.Component {
       this.timer = setInterval(this.tick, 1000); // start the timer
       this.props.setIsTimerRunning(true);
     }
+  };
+
+  startPomodoroForTask = (task) => {
+    if (task) {
+      this.setState({
+        timeLeft: task.pomodoros * this.props.sessionLength * 60,
+        currentTask: task,
+      });
+    } else {
+    }
+    this.resetTimer();
   };
 
   resetTimer = () => {
