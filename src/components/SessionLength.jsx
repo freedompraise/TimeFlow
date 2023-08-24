@@ -6,7 +6,6 @@ class Session extends Component {
     this.state = {
       inputValue: this.props.sessionLength.toString(), // for controlled input
     };
-    this.handleLengthChange = this.handleLengthChange.bind(this);
   }
 
   incrementSession = () => {
@@ -27,14 +26,6 @@ class Session extends Component {
     }
   };
 
-  componentDidUpdate(prevProps) {
-    // Check if the sessionLength prop has changed
-    if (prevProps.sessionLength !== this.props.sessionLength) {
-      // Update inputValue with the new sessionLength as a string
-      this.setState({ inputValue: this.props.sessionLength.toString() });
-    }
-  }
-
   handleLengthChange = (e) => {
     const newValue = e.target.value;
 
@@ -44,6 +35,14 @@ class Session extends Component {
       this.props.setSessionLength(parseInt(newValue, 10));
     }
   };
+
+  componentDidUpdate(prevProps) {
+    // Check if the sessionLength prop has changed
+    if (prevProps.sessionLength !== this.props.sessionLength) {
+      // Update inputValue with the new sessionLength as a string
+      this.setState({ inputValue: this.props.sessionLength.toString() });
+    }
+  }
   render() {
     return (
       <div className="p-4 rounded-md shadow-md text-center">
