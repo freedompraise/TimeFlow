@@ -19,6 +19,7 @@ class App extends Component {
       tasks: [],
       newTask: "",
       pomodoros: 1, // default number of pomodoros for a task
+      activeTask: null,
 
       setIsTimerRunning: (newIsTimerRunning) =>
         this.setState({
@@ -28,27 +29,36 @@ class App extends Component {
         this.setState({
           breakLength: newLength,
         }),
+      setActiveTask: (task) =>
+        this.setState({
+          activeTask: task,
+        }),
     };
     this.setSessionLength = this.setSessionLength.bind(this);
-    this.handleManageTasks = this.handleManageTasks.bind(this);
   }
 
   setSessionLength(value) {
     this.setState({ sessionLength: value });
   }
 
-  handleManageTasks = (action, taskIndex, taskInput, pomodorosInput) => {
+  handleManageTasks = (
+    action,
+    taskIndex,
+    newTask,
+    taskInput,
+    pomodorosInput
+  ) => {
     const { tasks, pomodoros } = this.state;
     const updatedTasks = manageTasks(
       action,
       tasks,
       taskIndex,
+      newTask,
       taskInput,
       pomodorosInput || pomodoros
     );
     this.setState({
       tasks: updatedTasks,
-      newTask: action === "add" ? "" : taskInput,
     });
   };
 
@@ -87,14 +97,19 @@ class App extends Component {
           setIsTimerRunning={(newIsTimerRunning) =>
             this.setState({ isTimerRunning: newIsTimerRunning })
           }
-        />
-        <TaskList
           tasks={this.state.tasks}
-          newTask={this.state.newTask}
-          pomodoros={this.state.pomodoros}
-          onUpdateTasks={this.handleManageTasks}
-          onAddTask={() => this.handleManageTasks("add")}
+          activeTask={this.state.activeTask}
         />
+        <div className="w-150">
+          <TaskList
+            tasks={this.state.tasks}
+            newTask={this.state.newTask}
+            pomodoros={this.state.pomodoros}
+            onUpdateTasks={this.handleManageTasks}
+            onAddTask={() => this.handleManageTasks("add")}
+            setActiveTask={(task) => this.setState({ activeTask: task })}
+          />
+        </div>
         <Footer className="App-footer mt-8" />
       </div>
     );

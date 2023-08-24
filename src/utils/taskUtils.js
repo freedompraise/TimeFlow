@@ -14,14 +14,12 @@ export function clearCompletedTasks(tasks) {
 }
 
 // Manage tasks based on action
-export function manageTasks(action, tasks, taskIndex, taskInput, pomodoros) {
+export function manageTasks(action, tasks, taskIndex, newTask) {
   const updatedTasks = [...tasks];
 
   switch (action) {
     case "add":
-      if (taskInput.trim() !== "") {
-        updatedTasks.push({ text: taskInput, completed: false, pomodoros });
-      }
+      updatedTasks.push(newTask);
       break;
     case "toggle":
       updatedTasks[taskIndex].completed = !updatedTasks[taskIndex].completed;
