@@ -6,7 +6,6 @@ class Break extends React.Component {
     this.state = {
       inputValue: this.props.breakLength.toString(), // for controlled input
     };
-    this.handleLengthChange = this.handleLengthChange.bind(this);
   }
 
   incrementBreak = () => {
@@ -28,15 +27,6 @@ class Break extends React.Component {
       }
     }
   };
-
-  componentDidUpdate(prevProps) {
-    // Check if the breakLength prop has changed
-    if (prevProps.breakLength !== this.props.breakLength) {
-      // Update inputValue with the new breakLength as a string
-      this.setState({ inputValue: this.props.breakLength.toString() });
-    }
-  }
-
   handleLengthChange = (e) => {
     const newValue = e.target.value;
 
@@ -46,6 +36,15 @@ class Break extends React.Component {
       this.props.setBreakLength(parseInt(newValue, 10));
     }
   };
+
+  componentDidUpdate(prevProps) {
+    // Check if the breakLength prop has changed
+    if (prevProps.breakLength !== this.props.breakLength) {
+      // Update inputValue with the new breakLength as a string
+      this.setState({ inputValue: this.props.breakLength.toString() });
+    }
+  }
+
   render() {
     return (
       <div className="p-4 rounded-md shadow-md text-center">
