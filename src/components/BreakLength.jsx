@@ -40,8 +40,10 @@ class Break extends React.Component {
   handleUnfocusChange = (e) => {
     let newValue = e.target.value;
     //Set to default break length value
-    if (+newValue === 0) newValue = 1;
-    this.props.setBreakLength(newValue);
+    if (+newValue === 0) {
+      newValue = 1;
+      this.props.setBreakLength(newValue);
+    }
   };
 
   handleLengthChange = (e) => {

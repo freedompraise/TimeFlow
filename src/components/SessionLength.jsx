@@ -38,8 +38,10 @@ class Session extends Component {
   handleUnfocusChange = (e) => {
     let newValue = e.target.value;
     //Set to default session length value
-    if (+newValue < 5) newValue = 5;
-    this.props.setSessionLength(newValue);
+    if (+newValue < 5) {
+      newValue = 5;
+      this.props.setSessionLength(newValue);
+    }
   };
 
   handleLengthChange = (e) => {
