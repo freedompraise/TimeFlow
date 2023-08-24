@@ -11,7 +11,6 @@ class Timer extends React.Component {
       isAlerted: false, // track whether the timer has few seconds left, then set alert
       isSession: true, // track whether the timer is in session or break mode
       isPlayingAlarm: false, // track whether the alarm is playing
-      currentTask: this.props.activeTask, // track current task being worked on
     };
     this.timer = null;
   }
@@ -21,8 +20,14 @@ class Timer extends React.Component {
     if (this.props.sessionLength !== prevProps.sessionLength) {
       this.resetTimer();
     }
-    if (this.props.currentTask !== prevProps.currentTask) {
-      this.startPomodoroForTask();
+    // Check if the activeTask prop has changed
+    if (this.props.activeTask !== prevProps.activeTask) {
+      // If there's an active task, set it as the current task; otherwise, reset the timer
+      if (this.props.activeTask) {
+        this.startPomodoroForTask(this.props.activeTask);
+      } else {
+        this.resetTimer();
+      }
     }
   }
 
@@ -39,9 +44,10 @@ class Timer extends React.Component {
   startPomodoroForTask = (task) => {
     if (task) {
       this.setState({
-        // timeLeft: task.pomodoros * this.props.sessionLength * 60,
         currentTask: task,
       });
+      this.timer = setInterval(this.tick, 1000); // start the timer
+      this.props.setIsTimerRunning(true);
     } else {
     }
     this.resetTimer();
@@ -103,8 +109,8 @@ class Timer extends React.Component {
 
   render() {
     const startStopButtonContent = this.props.isTimerRunning ? "Stop" : "Start";
-    const sessionContent = this.state.currentTask
-      ? this.state.currentTask.text
+    const sessionContent = this.props.activeTask
+      ? this.props.activeTask.text
       : "Session";
     const sessionBreakContent = this.state.isSession ? sessionContent : "Break";
     return (

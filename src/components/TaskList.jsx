@@ -68,11 +68,11 @@ class TaskList extends Component {
   };
 
   handleTaskClick = (index) => {
-    const { tasks } = this.props;
+    const { tasks, setActiveTask } = this.props;
     const selectedTask = tasks[index];
 
     // Trigger the Timer component to start the task timer
-    this.props.setActiveTask(selectedTask);
+    setActiveTask(selectedTask);
   };
 
   render() {
