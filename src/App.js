@@ -21,9 +21,9 @@ class App extends Component {
       pomodoros: 1, // default number of pomodoros for a task
       activeTask: null,
 
-      setIsTimerRunning: (newIsTimerRunning) =>
+      setIsTimerRunning: (isRunning) =>
         this.setState({
-          isTimerRunning: newIsTimerRunning,
+          isTimerRunning: isRunning,
         }),
       setBreakLength: (newLength) =>
         this.setState({
@@ -93,8 +93,8 @@ class App extends Component {
             this.setState({ breakLength: newLength })
           }
           isTimerRunning={this.state.isTimerRunning}
-          setIsTimerRunning={(newIsTimerRunning) =>
-            this.setState({ isTimerRunning: newIsTimerRunning })
+          setIsTimerRunning={(isRunning) =>
+            this.setState({ isTimerRunning: isRunning })
           }
           tasks={this.state.tasks}
           activeTask={this.state.activeTask}
