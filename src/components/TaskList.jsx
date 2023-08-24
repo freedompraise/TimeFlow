@@ -99,28 +99,34 @@ class TaskList extends Component {
                   }
                   title={task.text}
                 >
-                  {task.text.length > 20
-                    ? task.text.substring(0, 16) + "..."
+                  {task.text.length > 18
+                    ? task.text.substring(0, 14) + "..."
                     : task.text}
                 </span>
-                <button
-                  className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
-                  onClick={() => this.handleTaskClick(index)}
-                >
-                  <FontAwesomeIcon icon={faPlay} />
-                </button>
-                {/* Display the pomodoro fraction */}
-                <span className="text-sm ml-auto">
-                  {task.completed
-                    ? "Pomodoros Completed"
-                    : `${task.pomodorosCompleted}/${task.pomodoros}`}
-                </span>
-                <button
-                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
-                  onClick={() => this.removeTask(index)}
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
+                <div className="ml-auto flex items-center space-x-1">
+                  {/* Display the pomodoro fraction */}
+                  <span className="text-sm ml-auto">
+                    {task.completed
+                      ? "Completed!"
+                      : `${task.pomodorosCompleted}/${task.pomodoros}`}
+                  </span>
+                  {!task.completed && (
+                    <div>
+                      <button
+                        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
+                        onClick={() => this.handleTaskClick(index)}
+                      >
+                        <FontAwesomeIcon icon={faPlay} />
+                      </button>
+                      <button
+                        className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
+                        onClick={() => this.removeTask(index)}
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </li>
           ))}
