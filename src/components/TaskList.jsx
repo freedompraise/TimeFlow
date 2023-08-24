@@ -39,7 +39,7 @@ class TaskList extends Component {
   };
 
   toggleTaskCompleted = (index) => {
-    const updatedTasks = [...this.state.tasks];
+    const updatedTasks = [...this.props.tasks];
     if (updatedTasks[index]) {
       updatedTasks[index].completed = !updatedTasks[index].completed;
       this.setState({ tasks: updatedTasks });
@@ -59,6 +59,7 @@ class TaskList extends Component {
   removeTask = (index) => {
     const updatedTasks = removeTask(this.props.tasks, index);
     this.props.onUpdateTasks("remove", null, null, null, null, updatedTasks);
+    // this.props.setActiveTask(null);
   };
 
   clearCompletedTasks = () => {
