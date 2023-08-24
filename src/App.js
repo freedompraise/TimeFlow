@@ -73,16 +73,12 @@ class App extends Component {
           <Break
             breakLength={this.state.breakLength}
             sessionLength={this.state.sessionLength}
-            setBreakLength={(newLength) =>
-              this.setState({ breakLength: newLength })
-            }
+            setBreakLength={this.state.setBreakLength}
             isTimerRunning={this.state.isTimerRunning}
           />
           <Session
             sessionLength={this.state.sessionLength}
-            setSessionLength={(newLength) =>
-              this.setState({ sessionLength: newLength })
-            }
+            setSessionLength={this.setSessionLength}
             isTimerRunning={this.state.isTimerRunning}
           />
         </div>
@@ -90,15 +86,9 @@ class App extends Component {
         <Timer
           sessionLength={this.state.sessionLength}
           breakLength={this.state.breakLength}
-          setBreakLength={(newLength) =>
-            this.setState({ breakLength: newLength })
-          }
+          setBreakLength={this.state.setBreakLength}
           isTimerRunning={this.state.isTimerRunning}
-          setIsTimerRunning={(newIsTimerRunning) =>
-            this.setState({ isTimerRunning: newIsTimerRunning })
-          }
-          tasks={this.state.tasks}
-          activeTask={this.state.activeTask}
+          setIsTimerRunning={this.state.setIsTimerRunning}
         />
         <div className="w-150">
           <TaskList
