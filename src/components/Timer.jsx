@@ -110,7 +110,9 @@ class Timer extends React.Component {
   render() {
     const startStopButtonContent = this.props.isTimerRunning ? "Stop" : "Start";
     const sessionContent = this.props.activeTask
-      ? this.props.activeTask.text
+      ? this.props.activeTask.text.length > 18
+        ? this.props.activeTask.text.substring(0, 14) + "..."
+        : this.props.activeTask
       : "Session";
     const sessionBreakContent = this.state.isSession ? sessionContent : "Break";
     return (
