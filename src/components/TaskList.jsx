@@ -28,6 +28,17 @@ class TaskList extends Component {
     this.setState({ taskInput: "", pomodorosInput: 1 });
   };
 
+  removeTask = (index) => {
+    const updatedTasks = removeTask(this.props.tasks, index);
+    this.props.onUpdateTasks("remove", null, null, null, null, updatedTasks);
+    this.props.setActiveTask(null);
+  };
+
+  clearCompletedTasks = () => {
+    const updatedTasks = clearCompletedTasks(this.props.tasks);
+    this.props.onUpdateTasks("clear", null, null, null, null, updatedTasks);
+  };
+
   toggleTaskCompleted = (index) => {
     const updatedTasks = [...this.props.tasks];
     if (updatedTasks[index]) {
@@ -40,30 +51,18 @@ class TaskList extends Component {
     this.setState({ isAddingTask: !this.state.isAddingTask });
   };
 
+  handleTaskClick = (index) => {
+    const { tasks, setActiveTask } = this.props;
+    const selectedTask = tasks[index];
+    // Trigger the Timer component to start the task timer
+    setActiveTask(selectedTask);
+  };
+
   componentDidUpdate(prevProps) {
     if (prevProps.tasks !== this.props.tasks) {
       this.setState({ tasks: this.props.tasks || [] });
     }
   }
-
-  removeTask = (index) => {
-    const updatedTasks = removeTask(this.props.tasks, index);
-    this.props.onUpdateTasks("remove", null, null, null, null, updatedTasks);
-    this.props.setActiveTask(null);
-  };
-
-  clearCompletedTasks = () => {
-    const updatedTasks = clearCompletedTasks(this.props.tasks);
-    this.props.onUpdateTasks("clear", null, null, null, null, updatedTasks);
-  };
-
-  handleTaskClick = (index) => {
-    const { tasks, setActiveTask } = this.props;
-    const selectedTask = tasks[index];
-
-    // Trigger the Timer component to start the task timer
-    setActiveTask(selectedTask);
-  };
 
   render() {
     const { isAddingTask, taskInput, pomodorosInput } = this.state;
