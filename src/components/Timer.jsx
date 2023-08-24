@@ -13,14 +13,21 @@ class Timer extends React.Component {
       isPlayingAlarm: false, // track whether the alarm is playing
     };
     this.timer = null;
-    this.startStopTimer = this.startStopTimer.bind(this);
-    this.resetTimer = this.resetTimer.bind(this);
   }
 
   componentDidUpdate(prevProps) {
     // Update timer when the sessionLength prop changes
     if (this.props.sessionLength !== prevProps.sessionLength) {
       this.resetTimer();
+    }
+    // Check if the activeTask prop has changed
+    if (this.props.activeTask !== prevProps.activeTask) {
+      // If there's an active task, set it as the current task; otherwise, reset the timer
+      if (this.props.activeTask) {
+        this.startPomodoroForTask(this.props.activeTask);
+      } else {
+        this.resetTimer();
+      }
     }
   }
 
@@ -34,11 +41,24 @@ class Timer extends React.Component {
     }
   };
 
+  startPomodoroForTask = (task) => {
+    if (task) {
+      this.setState({
+        currentTask: task,
+      });
+      this.timer = setInterval(this.tick, 1000); // start the timer
+      this.props.setIsTimerRunning(true);
+    } else {
+    }
+    this.resetTimer();
+  };
+
   resetTimer = () => {
     clearInterval(this.timer); // stop the timer
     this.setState({
       timeLeft: this.props.sessionLength * 60,
       isSession: true,
+      currentTask: null,
       // isPlayingAlarm: false,
     });
     this.props.setIsTimerRunning(false);
@@ -89,7 +109,12 @@ class Timer extends React.Component {
 
   render() {
     const startStopButtonContent = this.props.isTimerRunning ? "Stop" : "Start";
-    const sessionBreakContent = this.state.isSession ? "Session" : "Break";
+    const sessionContent = this.props.activeTask
+      ? this.props.activeTask.text.length > 18
+        ? this.props.activeTask.text.substring(0, 14) + "..."
+        : this.props.activeTask.text
+      : "Session";
+    const sessionBreakContent = this.state.isSession ? sessionContent : "Break";
     return (
       <div className="rounded-lg border-4 border-gray-800 p-4 text-center">
         <p className="text-2xl font-semibold mb-4" id="timer-label">

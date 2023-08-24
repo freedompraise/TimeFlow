@@ -5,6 +5,8 @@ import Footer from "./components/Footer.jsx";
 import Session from "./components/SessionLength";
 import Break from "./components/BreakLength";
 import Timer from "./components/Timer";
+import TaskList from "./components/TaskList.jsx";
+import { manageTasks } from "./utils/taskUtils.js";
 import "tailwindcss/tailwind.css";
 
 class App extends Component {
@@ -12,8 +14,12 @@ class App extends Component {
     super(props);
     this.state = {
       breakLength: 5,
-      sessionLength: 25,
+      sessionLength: 25, //
       isTimerRunning: false, // check if timer is running
+      tasks: [],
+      newTask: "",
+      pomodoros: 1, // default number of pomodoros for a task
+      activeTask: null,
 
       setIsTimerRunning: (newIsTimerRunning) =>
         this.setState({
@@ -23,6 +29,10 @@ class App extends Component {
         this.setState({
           breakLength: newLength,
         }),
+      setActiveTask: (task) =>
+        this.setState({
+          activeTask: task,
+        }),
     };
     this.setSessionLength = this.setSessionLength.bind(this);
   }
@@ -31,10 +41,31 @@ class App extends Component {
     this.setState({ sessionLength: value });
   }
 
+  handleManageTasks = (
+    action,
+    taskIndex,
+    newTask,
+    taskInput,
+    pomodorosInput
+  ) => {
+    const { tasks, pomodoros } = this.state;
+    const updatedTasks = manageTasks(
+      action,
+      tasks,
+      taskIndex,
+      newTask,
+      taskInput,
+      pomodorosInput || pomodoros
+    );
+    this.setState({
+      tasks: updatedTasks,
+    });
+  };
+
   render() {
     return (
       <div
-        className="min-h-screen text-white flex flex-col items-center justify-center p-8"
+        className="min-h-screen text-white flex flex-col items-center justify-center p-16"
         style={{ backgroundColor: "#121d3a" }}
       >
         <Header className="App-header" />
@@ -59,6 +90,16 @@ class App extends Component {
           isTimerRunning={this.state.isTimerRunning}
           setIsTimerRunning={this.state.setIsTimerRunning}
         />
+        <div className="w-150">
+          <TaskList
+            tasks={this.state.tasks}
+            newTask={this.state.newTask}
+            pomodoros={this.state.pomodoros}
+            onUpdateTasks={this.handleManageTasks}
+            onAddTask={() => this.handleManageTasks("add")}
+            setActiveTask={(task) => this.setState({ activeTask: task })}
+          />
+        </div>
         <Footer className="App-footer mt-8" />
       </div>
     );

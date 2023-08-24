@@ -3,6 +3,9 @@ import React, { Component } from "react";
 class Session extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      inputValue: this.props.sessionLength.toString(), // for controlled input
+    };
     this.handleLengthChange = this.handleLengthChange.bind(this);
   }
 
@@ -24,16 +27,24 @@ class Session extends Component {
     }
   };
 
+  componentDidUpdate(prevProps) {
+    // Check if the sessionLength prop has changed
+    if (prevProps.sessionLength !== this.props.sessionLength) {
+      // Update inputValue with the new sessionLength as a string
+      this.setState({ inputValue: this.props.sessionLength.toString() });
+    }
+  }
+
   handleLengthChange = (e) => {
-    const value = e.target.value;
-    if (value >= 5 && value <= 40) {
-      this.props.setSessionLength(value);
+    const newValue = e.target.value;
+
+    // Only update state if the value is a valid number within the specified range
+    if (!isNaN(newValue) && newValue >= 5 && newValue <= 40) {
+      this.setState({ inputValue: newValue });
+      this.props.setSessionLength(parseInt(newValue, 10));
     }
   };
-
   render() {
-    const { sessionLength } = this.props;
-
     return (
       <div className="p-4 rounded-md shadow-md text-center">
         <p className="text-lg font-semibold" id="session-label">
@@ -51,9 +62,9 @@ class Session extends Component {
           <input
             id="session-length"
             data-testid="session-length"
-            value={sessionLength}
+            value={this.state.inputValue}
             onChange={this.handleLengthChange}
-            className="rounded-md py-2 px-4 mx-2 w-10 text-center"
+            className="rounded-md py-2 px-2 mx-0 w-12 text-center"
             style={{ backgroundColor: "transparent" }}
           />
           <button
