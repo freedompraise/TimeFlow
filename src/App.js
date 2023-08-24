@@ -105,7 +105,6 @@ class App extends Component {
             newTask={this.state.newTask}
             pomodoros={this.state.pomodoros}
             onUpdateTasks={this.handleManageTasks}
-            onAddTask={() => this.handleManageTasks("add")}
             setActiveTask={(task) => this.setState({ activeTask: task })}
           />
         </div>
