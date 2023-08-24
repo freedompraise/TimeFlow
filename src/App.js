@@ -33,12 +33,11 @@ class App extends Component {
         this.setState({
           activeTask: task,
         }),
+      setSessionLength: (newLength) =>
+        this.setState({
+          sessionLength: newLength,
+        }),
     };
-    this.setSessionLength = this.setSessionLength.bind(this);
-  }
-
-  setSessionLength(value) {
-    this.setState({ sessionLength: value });
   }
 
   handleManageTasks = (
