@@ -28,16 +28,6 @@ class TaskList extends Component {
     this.setState({ taskInput: "", pomodorosInput: 1 });
   };
 
-  markTaskCompleted = (index) => {
-    const updatedTasks = [...this.props.tasks];
-    updatedTasks[index].completed = true;
-
-    // Increment pomodorosCompleted
-    updatedTasks[index].pomodorosCompleted += 1;
-
-    this.props.onUpdateTasks(updatedTasks);
-  };
-
   toggleTaskCompleted = (index) => {
     const updatedTasks = [...this.props.tasks];
     if (updatedTasks[index]) {
