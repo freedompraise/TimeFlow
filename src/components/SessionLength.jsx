@@ -13,7 +13,7 @@ class Session extends Component {
 
     if (sessionLength < 40 && !isTimerRunning) {
       this.setState({ sessionLength: sessionLength + 1 });
-      setSessionLength(sessionLength + 1);
+      setSessionLength(+sessionLength + 1);
     }
   };
 
@@ -26,12 +26,24 @@ class Session extends Component {
     }
   };
 
-  handleLengthChange = (e) => {
-    const newValue = e.target.value;
+  handleUnfocusChange = (e) => {
+    let newValue = e.target.value;
+    //Set to default session length value
+    if (+newValue < 5) {
+      newValue = 5;
+      this.props.setSessionLength(newValue);
+    }
+  };
 
-    // Only update state if the value is a valid number within the specified range
-    if (!isNaN(newValue) && newValue >= 5 && newValue <= 40) {
-      this.setState({ inputValue: newValue });
+  handleLengthChange = (e) => {
+    let newValue = e.target.value;
+    if (newValue === "") newValue = 0;
+    const notANumber = parseInt(newValue, 10);
+    //Only update state if the value is a valid number within the specified range
+    if (
+      newValue === 0 ||
+      (!isNaN(notANumber) && newValue >= 1 && newValue <= 40)
+    ) {
       this.props.setSessionLength(parseInt(newValue, 10));
     }
   };
@@ -63,6 +75,7 @@ class Session extends Component {
             data-testid="session-length"
             value={this.state.inputValue}
             onChange={this.handleLengthChange}
+            onBlur={this.handleUnfocusChange}
             className="rounded-md py-2 px-2 mx-0 w-12 text-center"
             style={{ backgroundColor: "transparent" }}
           />

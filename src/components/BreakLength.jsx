@@ -14,9 +14,10 @@ class Break extends React.Component {
 
     if (breakLength < 10 && breakLength < sessionLength && !isTimerRunning) {
       // add condition to prevent breakLength from going above 10 minutes or sessionLength
-      setBreakLength(breakLength + 1);
+      setBreakLength(+breakLength + 1);
     }
   };
+
   decrementBreak = () => {
     const { isTimerRunning, breakLength, setBreakLength } = this.props;
 
@@ -27,13 +28,27 @@ class Break extends React.Component {
       }
     }
   };
-  handleLengthChange = (e) => {
-    const newValue = e.target.value;
 
-    // Only update state if the value is a valid number within the specified range
-    if (!isNaN(newValue) && newValue >= 1 && newValue <= 10) {
-      this.setState({ inputValue: newValue });
-      this.props.setBreakLength(parseInt(newValue, 10));
+  handleUnfocusChange = (e) => {
+    let newValue = e.target.value;
+    //Set to default break length value
+    if (+newValue === 0) {
+      newValue = 1;
+      this.props.setBreakLength(newValue);
+    }
+  };
+
+  handleLengthChange = (e) => {
+    let newValue = e.target.value;
+    if (newValue === "") newValue = 0;
+    const notANumber = parseInt(newValue, 10);
+    //Only update state if the value is a valid number within the specified range
+    if (
+      newValue === 0 ||
+      (!isNaN(notANumber) && newValue >= 1 && newValue <= 10)
+    ) {
+      // this.setState({ inputValue: newValue });
+      this.props.setBreakLength(notANumber);
     }
   };
 
@@ -65,6 +80,7 @@ class Break extends React.Component {
             data-testid="break-length"
             value={this.state.inputValue}
             onChange={this.handleLengthChange}
+            onBlur={this.handleUnfocusChange}
             className="rounded-md py-2 px-2 mx-0 w-12 text-center"
             style={{ backgroundColor: "transparent" }}
           />
