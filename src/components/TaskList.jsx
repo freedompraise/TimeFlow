@@ -71,7 +71,7 @@ class TaskList extends Component {
     const selectedTask = tasks[index];
 
     // Trigger the Timer component to start the task timer
-    this.props.isTimerRunning(selectedTask);
+    this.props.onTaskClick(selectedTask);
   };
 
   render() {
