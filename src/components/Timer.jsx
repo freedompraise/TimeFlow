@@ -11,7 +11,7 @@ class Timer extends React.Component {
       isAlerted: false, // track whether the timer has few seconds left, then set alert
       isSession: true, // track whether the timer is in session or break mode
       isPlayingAlarm: false, // track whether the alarm is playing
-      currentTask: null, // track current task being worked on
+      currentTask: this.props.activeTask, // track current task being worked on
     };
     this.timer = null;
   }
@@ -20,6 +20,9 @@ class Timer extends React.Component {
     // Update timer when the sessionLength prop changes
     if (this.props.sessionLength !== prevProps.sessionLength) {
       this.resetTimer();
+    }
+    if (this.props.currentTask !== prevProps.currentTask) {
+      this.startPomodoroForTask();
     }
   }
 
@@ -36,7 +39,7 @@ class Timer extends React.Component {
   startPomodoroForTask = (task) => {
     if (task) {
       this.setState({
-        timeLeft: task.pomodoros * this.props.sessionLength * 60,
+        // timeLeft: task.pomodoros * this.props.sessionLength * 60,
         currentTask: task,
       });
     } else {

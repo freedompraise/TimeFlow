@@ -29,9 +29,12 @@ class App extends Component {
         this.setState({
           breakLength: newLength,
         }),
+      setActiveTask: (task) =>
+        this.setState({
+          activeTask: task,
+        }),
     };
     this.setSessionLength = this.setSessionLength.bind(this);
-    this.handleManageTasks = this.handleManageTasks.bind(this);
   }
 
   setSessionLength(value) {
@@ -56,12 +59,6 @@ class App extends Component {
     );
     this.setState({
       tasks: updatedTasks,
-    });
-  };
-
-  hadnleTaskClick = (selectedTask) => {
-    this.setState({
-      activeTask: selectedTask,
     });
   };
 
@@ -101,6 +98,7 @@ class App extends Component {
             this.setState({ isTimerRunning: newIsTimerRunning })
           }
           tasks={this.state.tasks}
+          activeTask={this.state.activeTask}
         />
         <div className="w-150">
           <TaskList
@@ -109,7 +107,7 @@ class App extends Component {
             pomodoros={this.state.pomodoros}
             onUpdateTasks={this.handleManageTasks}
             onAddTask={() => this.handleManageTasks("add")}
-            onTaskClick={this.hadnleTaskClick}
+            setActiveTask={(task) => this.setState({ activeTask: task })}
           />
         </div>
         <Footer className="App-footer mt-8" />
