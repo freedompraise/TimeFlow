@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus, faPlay } from "@fortawesome/free-solid-svg-icons";
-import { removeTask, clearCompletedTasks } from "../utils/taskUtils";
+import { addTask, removeTask, clearCompletedTasks } from "../utils/taskUtils";
 
 class TaskList extends Component {
   constructor(props) {
@@ -15,27 +15,23 @@ class TaskList extends Component {
 
   addTask = () => {
     const { taskInput, pomodorosInput } = this.state;
-    if (taskInput.trim() === "") {
+    const newTask = addTask(taskInput, pomodorosInput);
+    if (!newTask) {
       return;
     }
-    const newTask = {
-      text: taskInput,
-      completed: false,
-      pomodoros: pomodorosInput,
-      pomodorosCompleted: 0, // Initialize pomodorosCompleted
-    };
     this.props.onUpdateTasks("add", null, newTask, null, null, null);
     this.setState({ taskInput: "", pomodorosInput: 1 });
   };
 
-  markTaskCompleted = (index) => {
-    const updatedTasks = [...this.props.tasks];
-    updatedTasks[index].completed = true;
+  removeTask = (index) => {
+    const updatedTasks = removeTask(this.props.tasks, index);
+    this.props.onUpdateTasks("remove", null, null, null, null, updatedTasks);
+    this.props.setActiveTask(null);
+  };
 
-    // Increment pomodorosCompleted
-    updatedTasks[index].pomodorosCompleted += 1;
-
-    this.props.onUpdateTasks(updatedTasks);
+  clearCompletedTasks = () => {
+    const updatedTasks = clearCompletedTasks(this.props.tasks);
+    this.props.onUpdateTasks("clear", null, null, null, null, updatedTasks);
   };
 
   toggleTaskCompleted = (index) => {
@@ -50,30 +46,18 @@ class TaskList extends Component {
     this.setState({ isAddingTask: !this.state.isAddingTask });
   };
 
+  handleTaskClick = (index) => {
+    const { tasks, setActiveTask } = this.props;
+    const selectedTask = tasks[index];
+    // Trigger the Timer component to start the task timer
+    setActiveTask(selectedTask);
+  };
+
   componentDidUpdate(prevProps) {
     if (prevProps.tasks !== this.props.tasks) {
       this.setState({ tasks: this.props.tasks || [] });
     }
   }
-
-  removeTask = (index) => {
-    const updatedTasks = removeTask(this.props.tasks, index);
-    this.props.onUpdateTasks("remove", null, null, null, null, updatedTasks);
-    this.props.setActiveTask(null);
-  };
-
-  clearCompletedTasks = () => {
-    const updatedTasks = clearCompletedTasks(this.props.tasks);
-    this.props.onUpdateTasks("clear", null, null, null, null, updatedTasks);
-  };
-
-  handleTaskClick = (index) => {
-    const { tasks, setActiveTask } = this.props;
-    const selectedTask = tasks[index];
-
-    // Trigger the Timer component to start the task timer
-    setActiveTask(selectedTask);
-  };
 
   render() {
     const { isAddingTask, taskInput, pomodorosInput } = this.state;

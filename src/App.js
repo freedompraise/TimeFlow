@@ -21,9 +21,9 @@ class App extends Component {
       pomodoros: 1, // default number of pomodoros for a task
       activeTask: null,
 
-      setIsTimerRunning: (newIsTimerRunning) =>
+      setIsTimerRunning: (isRunning) =>
         this.setState({
-          isTimerRunning: newIsTimerRunning,
+          isTimerRunning: isRunning,
         }),
       setBreakLength: (newLength) =>
         this.setState({
@@ -33,12 +33,11 @@ class App extends Component {
         this.setState({
           activeTask: task,
         }),
+      setSessionLength: (newLength) =>
+        this.setState({
+          sessionLength: newLength,
+        }),
     };
-    this.setSessionLength = this.setSessionLength.bind(this);
-  }
-
-  setSessionLength(value) {
-    this.setState({ sessionLength: value });
   }
 
   handleManageTasks = (
@@ -78,7 +77,7 @@ class App extends Component {
           />
           <Session
             sessionLength={this.state.sessionLength}
-            setSessionLength={this.setSessionLength}
+            setSessionLength={this.state.setSessionLength}
             isTimerRunning={this.state.isTimerRunning}
           />
         </div>
@@ -89,6 +88,8 @@ class App extends Component {
           setBreakLength={this.state.setBreakLength}
           isTimerRunning={this.state.isTimerRunning}
           setIsTimerRunning={this.state.setIsTimerRunning}
+          tasks={this.state.tasks}
+          activeTask={this.state.activeTask}
         />
         <div className="w-150">
           <TaskList
@@ -96,8 +97,7 @@ class App extends Component {
             newTask={this.state.newTask}
             pomodoros={this.state.pomodoros}
             onUpdateTasks={this.handleManageTasks}
-            onAddTask={() => this.handleManageTasks("add")}
-            setActiveTask={(task) => this.setState({ activeTask: task })}
+            setActiveTask={this.state.setActiveTask}
           />
         </div>
         <Footer className="App-footer mt-8" />
