@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPlus, faPlay } from "@fortawesome/free-solid-svg-icons";
-import { removeTask, clearCompletedTasks } from "../utils/taskUtils";
+import { addTask, removeTask, clearCompletedTasks } from "../utils/taskUtils";
 
 class TaskList extends Component {
   constructor(props) {
@@ -15,15 +15,10 @@ class TaskList extends Component {
 
   addTask = () => {
     const { taskInput, pomodorosInput } = this.state;
-    if (taskInput.trim() === "") {
+    const newTask = addTask(taskInput, pomodorosInput);
+    if (!newTask) {
       return;
     }
-    const newTask = {
-      text: taskInput,
-      completed: false,
-      pomodoros: pomodorosInput,
-      pomodorosCompleted: 0, // Initialize pomodorosCompleted
-    };
     this.props.onUpdateTasks("add", null, newTask, null, null, null);
     this.setState({ taskInput: "", pomodorosInput: 1 });
   };

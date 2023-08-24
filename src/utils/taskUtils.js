@@ -1,6 +1,14 @@
 // Add a task to the list
-export function addTask(tasks, newTask, pomodoros) {
-  return [...tasks, { text: newTask, completed: false, pomodoros: pomodoros }];
+export function addTask(taskInput, pomodorosInput) {
+  if (taskInput.trim() === "") {
+    return null; // Return null or some kind of error handling as needed
+  }
+  return {
+    text: taskInput,
+    completed: false,
+    pomodoros: pomodorosInput,
+    pomodorosCompleted: 0,
+  };
 }
 
 // Remove a task from the list
