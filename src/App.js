@@ -78,7 +78,7 @@ class App extends Component {
           />
           <Session
             sessionLength={this.state.sessionLength}
-            setSessionLength={this.state.setSessionLength}
+            setSessionLength={this.setSessionLength}
             isTimerRunning={this.state.isTimerRunning}
           />
         </div>
