@@ -19,6 +19,7 @@ class App extends Component {
       tasks: [],
       newTask: "",
       pomodoros: 1, // default number of pomodoros for a task
+      activeTask: null,
 
       setIsTimerRunning: (newIsTimerRunning) =>
         this.setState({
@@ -55,6 +56,12 @@ class App extends Component {
     );
     this.setState({
       tasks: updatedTasks,
+    });
+  };
+
+  hadnleTaskClick = (selectedTask) => {
+    this.setState({
+      activeTask: selectedTask,
     });
   };
 
@@ -102,6 +109,7 @@ class App extends Component {
             pomodoros={this.state.pomodoros}
             onUpdateTasks={this.handleManageTasks}
             onAddTask={() => this.handleManageTasks("add")}
+            onTaskClick={this.hadnleTaskClick}
           />
         </div>
         <Footer className="App-footer mt-8" />
