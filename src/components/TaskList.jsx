@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faPlus, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { removeTask, clearCompletedTasks } from "../utils/taskUtils";
 
 class TaskList extends Component {
@@ -39,7 +39,7 @@ class TaskList extends Component {
   };
 
   toggleTaskCompleted = (index) => {
-    const updatedTasks = [...this.state.tasks];
+    const updatedTasks = [...this.props.tasks];
     if (updatedTasks[index]) {
       updatedTasks[index].completed = !updatedTasks[index].completed;
       this.setState({ tasks: updatedTasks });
@@ -59,11 +59,20 @@ class TaskList extends Component {
   removeTask = (index) => {
     const updatedTasks = removeTask(this.props.tasks, index);
     this.props.onUpdateTasks("remove", null, null, null, null, updatedTasks);
+    this.props.setActiveTask(null);
   };
 
   clearCompletedTasks = () => {
     const updatedTasks = clearCompletedTasks(this.props.tasks);
     this.props.onUpdateTasks("clear", null, null, null, null, updatedTasks);
+  };
+
+  handleTaskClick = (index) => {
+    const { tasks, setActiveTask } = this.props;
+    const selectedTask = tasks[index];
+
+    // Trigger the Timer component to start the task timer
+    setActiveTask(selectedTask);
   };
 
   render() {
@@ -90,22 +99,34 @@ class TaskList extends Component {
                   }
                   title={task.text}
                 >
-                  {task.text.length > 20
-                    ? task.text.substring(0, 16) + "..."
+                  {task.text.length > 18
+                    ? task.text.substring(0, 14) + "..."
                     : task.text}
                 </span>
-                {/* Display the pomodoro fraction */}
-                <span className="text-sm ml-auto">
-                  {task.completed
-                    ? "Pomodoros Completed"
-                    : `${task.pomodorosCompleted}/${task.pomodoros}`}
-                </span>
-                <button
-                  className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
-                  onClick={() => this.removeTask(index)}
-                >
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
+                <div className="ml-auto flex items-center space-x-1">
+                  {/* Display the pomodoro fraction */}
+                  <span className="text-sm ml-auto">
+                    {task.completed
+                      ? "Completed!"
+                      : `${task.pomodorosCompleted}/${task.pomodoros}`}
+                  </span>
+                  {!task.completed && (
+                    <div>
+                      <button
+                        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
+                        onClick={() => this.handleTaskClick(index)}
+                      >
+                        <FontAwesomeIcon icon={faPlay} />
+                      </button>
+                      <button
+                        className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
+                        onClick={() => this.removeTask(index)}
+                      >
+                        <FontAwesomeIcon icon={faTrash} />
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
             </li>
           ))}
