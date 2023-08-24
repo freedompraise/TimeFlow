@@ -59,7 +59,7 @@ class TaskList extends Component {
   removeTask = (index) => {
     const updatedTasks = removeTask(this.props.tasks, index);
     this.props.onUpdateTasks("remove", null, null, null, null, updatedTasks);
-    // this.props.setActiveTask(null);
+    this.props.setActiveTask(null);
   };
 
   clearCompletedTasks = () => {
