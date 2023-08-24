@@ -32,7 +32,7 @@ class Session extends Component {
   };
 
   render() {
-    const { sessionLength, isTimerRunning } = this.props;
+    const { sessionLength } = this.props;
 
     return (
       <div className="p-4 rounded-md shadow-md text-center">
@@ -41,9 +41,7 @@ class Session extends Component {
         </p>
         <div className="flex justify-center items-center mt-2">
           <button
-            className={`${
-              isTimerRunning ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-600"
-            } text-white font-semibold py-2 px-4 rounded-l`}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-l"
             id="session-decrement"
             data-testid="session-decrement"
             onClick={this.decrementSession}
@@ -54,15 +52,12 @@ class Session extends Component {
             id="session-length"
             data-testid="session-length"
             value={sessionLength}
-            disabled={isTimerRunning}
             onChange={this.handleLengthChange}
-            className="rounded-md py-2 px-4 mx-2 w-14 text-center"
+            className="rounded-md py-2 px-4 mx-2 w-10 text-center"
             style={{ backgroundColor: "transparent" }}
           />
           <button
-            className={`${
-              isTimerRunning ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-600"
-            } text-white font-semibold py-2 px-4 rounded-r`}
+            className="bg-blue-500 text-white hover:bg-blue-600 font-semibold py-2 px-4 rounded-r"
             id="session-increment"
             data-testid="session-increment"
             onClick={this.incrementSession}
