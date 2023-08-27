@@ -13,12 +13,6 @@ class Sound extends React.Component {
       this.playAudio();
     }
   }
-
-  componentWillUnmount() {
-    // Pause the audio when the component unmounts
-    this.audio.pause();
-    this.audio.currentTime = 0;
-  }
   // TO DO: make the alarm sound play for entire 10 secs, rahter than just 1 sec
   playAudio = () => {
     // Play the audio only if it's not already playing
