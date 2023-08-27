@@ -5,6 +5,7 @@ class Session extends Component {
     super(props);
     this.state = {
       inputValue: this.props.sessionLength.toString(), // for controlled input
+      minLength: 5,
     };
   }
 
@@ -20,7 +21,7 @@ class Session extends Component {
   decrementSession = () => {
     const { isTimerRunning, sessionLength, setSessionLength } = this.props;
 
-    if (sessionLength > 5 && !isTimerRunning) {
+    if (sessionLength > this.state.minLength && !isTimerRunning) {
       this.setState({ sessionLength: sessionLength - 1 });
       setSessionLength(sessionLength - 1);
     }
@@ -29,8 +30,8 @@ class Session extends Component {
   handleUnfocusChange = (e) => {
     let newValue = e.target.value;
     //Set to default session length value
-    if (+newValue < 5) {
-      newValue = 5;
+    if (+newValue < this.state.minLength) {
+      newValue = this.state.minLength;
       this.props.setSessionLength(newValue);
     }
   };
