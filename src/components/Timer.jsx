@@ -17,17 +17,22 @@ class Timer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { sessionLength, activeTask, setIsTimerRunning, isTimerRunning } =
+      this.props;
     // Update timer when the sessionLength prop changes
-    if (this.props.sessionLength !== prevProps.sessionLength) {
+    if (sessionLength !== prevProps.sessionLength) {
       this.resetTimer();
     }
     // Check if the activeTask prop has changed
-    if (this.props.activeTask !== prevProps.activeTask) {
-      // If there's an active task, set it as the current task; otherwise, reset the timer
-      if (this.props.activeTask) {
-        this.startPomodoroForTask(this.props.activeTask);
+    if (activeTask !== prevProps.activeTask) {
+      if (isTimerRunning === false) {
+        // If there's an active task, set it as the current task
+        this.timer = setInterval(this.tick, 1000);
+        setIsTimerRunning(true);
       } else {
+        // If there's no active task, reset the timer
         this.resetTimer();
+        setIsTimerRunning(false);
       }
     }
   }
