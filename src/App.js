@@ -98,6 +98,7 @@ class App extends Component {
             pomodoros={this.state.pomodoros}
             onUpdateTasks={this.handleManageTasks}
             setActiveTask={this.state.setActiveTask}
+            setIsTimerRunning={this.state.setIsTimerRunning}
           />
         </div>
         <Footer className="App-footer mt-8" />
