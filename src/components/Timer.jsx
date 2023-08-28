@@ -1,6 +1,7 @@
 import React from "react";
 import Sound from "./Sound";
 import alarmSound from "../assets/sounds/sound.mp3";
+import { formatTime } from "../utils/timerUtils";
 
 class Timer extends React.Component {
   constructor(props) {
@@ -99,14 +100,6 @@ class Timer extends React.Component {
     }
   };
 
-  formatTime = (timeInseconds) => {
-    const minutes = Math.floor(timeInseconds / 60);
-    const remainingSeconds = Math.floor(timeInseconds % 60);
-    return `${minutes < 10 ? 0 : ""}${minutes}:${
-      remainingSeconds < 10 ? 0 : ""
-    }${remainingSeconds}`;
-  };
-
   render() {
     const startStopButtonContent = this.props.isTimerRunning ? "Stop" : "Start";
     const sessionContent = this.props.activeTask
@@ -125,7 +118,7 @@ class Timer extends React.Component {
           id="time-left"
           data-testid="time-left"
         >
-          {this.formatTime(this.state.timeLeft)}
+          {formatTime(this.state.timeLeft)}
         </p>
         <div className="mb-2">
           <button
@@ -146,9 +139,10 @@ class Timer extends React.Component {
           </button>
         </div>
         {/* Play the alarm sound when isPlayingAlarm is true */}
-        {this.state.isPlayingAlarm && (
-          <Sound src={alarmSound} autoplay={true} />
-        )}
+        {this.state.isPlayingAlarm &&
+          (console.log("Rendering Sound component...") || (
+            <Sound src={alarmSound} autoplay={true} />
+          ))}
       </div>
     );
   }
