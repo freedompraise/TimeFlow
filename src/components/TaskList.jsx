@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faPlus, faPlay } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrash,
+  faPlus,
+  faPlay,
+  faStop,
+} from "@fortawesome/free-solid-svg-icons";
 import { addTask, removeTask, clearCompletedTasks } from "../utils/taskUtils";
 
 class TaskList extends Component {
@@ -10,6 +15,7 @@ class TaskList extends Component {
       taskInput: "",
       pomodorosInput: 1, // default number of pomodoros
       isAddingTask: false, // Track whether the user is adding a task
+      activeTaskIndex: -1, // -1 means no task is active
     };
   }
 
@@ -47,10 +53,18 @@ class TaskList extends Component {
   };
 
   handleTaskClick = (index) => {
-    const { tasks, setActiveTask } = this.props;
+    const { tasks, setActiveTask, isTimerRunning, setIsTimerRunning } =
+      this.props;
     const selectedTask = tasks[index];
-    // Trigger the Timer component to start the task timer
-    setActiveTask(selectedTask);
+    if (index === this.state.activeTaskIndex) {
+      // Clicked on the active task, stop the timer
+      setActiveTask(null);
+      this.setState({ activeTaskIndex: -1 });
+    } else if (!isTimerRunning) {
+      setActiveTask(selectedTask);
+      setIsTimerRunning(true);
+      this.setState({ activeTaskIndex: index });
+    }
   };
 
   componentDidUpdate(prevProps) {
@@ -60,7 +74,8 @@ class TaskList extends Component {
   }
 
   render() {
-    const { isAddingTask, taskInput, pomodorosInput } = this.state;
+    const { isAddingTask, taskInput, pomodorosInput, activeTaskIndex } =
+      this.state;
     const hasCompletedTasks = this.props.tasks.some((task) => task.completed);
 
     return (
@@ -96,12 +111,23 @@ class TaskList extends Component {
                   </span>
                   {!task.completed && (
                     <div>
-                      <button
-                        className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
-                        onClick={() => this.handleTaskClick(index)}
-                      >
-                        <FontAwesomeIcon icon={faPlay} />
-                      </button>
+                      {index === activeTaskIndex && !task.completed ? (
+                        // Render stop button for active task
+                        <button
+                          className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
+                          onClick={() => this.handleTaskClick(index)}
+                        >
+                          <FontAwesomeIcon icon={faStop} />
+                        </button>
+                      ) : (
+                        // Render play button for other tasks
+                        <button
+                          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
+                          onClick={() => this.handleTaskClick(index)}
+                        >
+                          <FontAwesomeIcon icon={faPlay} />
+                        </button>
+                      )}
                       <button
                         className="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-md ml-auto"
                         onClick={() => this.removeTask(index)}
