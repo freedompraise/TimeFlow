@@ -1,6 +1,7 @@
 import React from "react";
 import Sound from "./Sound";
 import alarmSound from "../assets/sounds/sound.mp3";
+import { formatTime } from "../utils/timerUtils";
 
 class Timer extends React.Component {
   constructor(props) {
@@ -68,7 +69,6 @@ class Timer extends React.Component {
     if (this.state.timeLeft > 0) {
       this.setState({
         timeLeft: this.state.timeLeft - 1,
-        // play the alarm if the timer is at :1
         isPlayingAlarm:
           this.state.timeLeft === 2 && !this.state.isPlayingAlarm
             ? true
@@ -80,7 +80,7 @@ class Timer extends React.Component {
       clearInterval(this.timer); // stop the timer
 
       this.setState({
-        timeLeft: this.state.isSession // specify the time left based on the mode, ie. session or break
+        timeLeft: this.state.isSession
           ? this.pomodorosCompleted % 3 === 0 // specify the break length based on the number of pomodoros completed
             ? this.props.setBreakLength(3 * this.props.breakLength)
             : this.props.breakLength * 60 // switch time left to break length in seconds if the timer was in session mode
@@ -88,7 +88,7 @@ class Timer extends React.Component {
         pomodorosCompleted: !this.state.isSession
           ? this.state.pomodorosCompleted + 1 // increase the number of pomodoros completed if the timer was in break mode
           : this.state.pomodorosCompleted,
-        isSession: !this.state.isSession, // switch to break mode if the timer was in session mode, or vice versa
+        isSession: !this.state.isSession,
         isPlayingAlarm: false,
         isAlerted: false,
       });
@@ -97,14 +97,6 @@ class Timer extends React.Component {
         this.timer = setInterval(this.tick, 1000);
       }
     }
-  };
-
-  formatTime = (timeInseconds) => {
-    const minutes = Math.floor(timeInseconds / 60);
-    const remainingSeconds = Math.floor(timeInseconds % 60);
-    return `${minutes < 10 ? 0 : ""}${minutes}:${
-      remainingSeconds < 10 ? 0 : ""
-    }${remainingSeconds}`;
   };
 
   render() {
@@ -125,7 +117,7 @@ class Timer extends React.Component {
           id="time-left"
           data-testid="time-left"
         >
-          {this.formatTime(this.state.timeLeft)}
+          {formatTime(this.state.timeLeft)}
         </p>
         <div className="mb-2">
           <button
@@ -146,9 +138,10 @@ class Timer extends React.Component {
           </button>
         </div>
         {/* Play the alarm sound when isPlayingAlarm is true */}
-        {this.state.isPlayingAlarm && (
-          <Sound src={alarmSound} autoplay={true} />
-        )}
+        {this.state.isPlayingAlarm &&
+          (console.log("Rendering Sound component...") || (
+            <Sound src={alarmSound} autoplay={true} />
+          ))}
       </div>
     );
   }
