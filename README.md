@@ -11,6 +11,7 @@ The **TimeFlow App** is a productivity tool based on the **Pomodoro Technique**,
 - Play an alarm sound to signal the end of a session.
 - Start, stop, and reset the timer.
 - Increase break session duration after completing a set number of Pomodoros.
+- Create Tasks and assign pomodoros to them (faulty)
 
 ## Getting Started
 
