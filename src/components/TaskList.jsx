@@ -153,7 +153,7 @@ class TaskList extends Component {
         {/* Toggle input form */}
         <button
           onClick={this.toggleInputForm}
-          className="text-white hover:bg-blue-800 hover:text-white bg-blue-500 font-semibold py-2 px-2 rounded-md mx-auto block"
+          className="text-white hover:bg-blue-800 hover:text-white bg-blue-500 font-semibold p-4 rounded-md mx-auto block"
         >
           {isAddingTask ? "Cancel" : "Add Task"}
         </button>
