@@ -6,7 +6,7 @@ const Footer = () => {
       <h3 className="text-sm">
         Proudly built by{" "}
         <a
-          href="https://linkfree.io/freedompraise"
+          href="https://github.com/freedompraise"
           target="_blank"
           rel="noopener noreferrer"
           className="text-red-300 hover:text-blue-200"
